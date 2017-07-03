@@ -31,45 +31,6 @@ CC  := ${CC_COMMAND}
 FC  := ${FC_COMMAND}
 AR  := ar
 
-#------------------------------------------------------------------------
-# Links to the Ericsson libraries
-# If you want to explicitly set the path to a library,
-# use the LIB_HOME variable. LIB_NAME and VERSION are then not used.
-# Order of the libraries is important since
-# earlier mentioned libraries may depend on later ones.
-#------------------------------------------------------------------------
-
-#------------------------------------------------------------------------
-# Link to WCL
-#------------------------------------------------------------------------
-#LIB_NAME := WCL
-#VERSION  := 2.6.4
-#LIB_HOME :=
-#include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_lib
-
-#------------------------------------------------------------------------
-# Link to apl
-#------------------------------------------------------------------------
-#LIB_NAME := apl
-#VERSION  := 2.6.15
-#LIB_HOME :=
-#include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_lib
-
-#------------------------------------------------------------------------
-# Link to lstools
-#------------------------------------------------------------------------
-#LIB_NAME := lstools
-#VERSION  := 1.9.25
-#LIB_HOME :=
-#include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_lib
-
-#------------------------------------------------------------------------
-# Link to racl
-#------------------------------------------------------------------------
-#LIB_NAME := racl
-#VERSION  := 1.1.9
-#LIB_HOME :=
-#include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_lib
 
 #------------------------------------------------------------------------
 # Links to the it++ libraries.
@@ -82,8 +43,9 @@ AR  := ar
 #------------------------------------------------------------------------
 LIB_NAME := itpp
 VERSION  := 4.0.6_er13
-#LIB_HOME :=
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_itpp
+INCLUDE_PATH := $(INCLUDE_PATH) -I/opt/itpp/itpp-4.3.1
+LIB_HOME := $(LIB_HOME) -L/usr/local/lib
+LIBS_SHARED := $(LIBS_SHARED) -litpp
 
 #------------------------------------------------------------------------
 # Link to it++external
@@ -92,51 +54,38 @@ include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_itpp
 # Any other value of the NO_CBLAS variable or undefined means linking
 # with CBLAS is attempted.
 #------------------------------------------------------------------------
-LIB_NAME := itpp-external
-VERSION  := 3.2.0_er4
+#LIB_NAME := itpp-external
+#VERSION  := 3.2.0_er4
 #LIB_HOME :=
-NO_CBLAS := true
-USE_OPENBLAS := true
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_itpp-external
+#NO_CBLAS := true
+#USE_OPENBLAS := true
+#include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_itpp-external
 
 #------------------------------------------------------------------------
 # Link to boost_python
 #------------------------------------------------------------------------
 LIB_NAME := boost_python
 VERSION  := 1_63
-LIB_HOME := 
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_boost
+INCLUDE_PATH := $(INCLUDE_PATH) -I/opt/boost/boost_1_63_0
+LIB_HOME := $(LIB_HOME) -L/usr/local/lib
+LIBS_SHARED := $(LIBS_SHARED) -l$(LIB_NAME)
 
 #------------------------------------------------------------------------
 # Link to boost_numpy
 #------------------------------------------------------------------------
 LIB_NAME := boost_numpy
 VERSION  := 1_63
-LIB_HOME := 
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_boost
+LIB_HOME := $(LIB_HOME) -L/opt/boost/boost_1_63_0/stage/lib
+LIBS_SHARED := $(LIBS_SHARED) -l$(LIB_NAME)
 
 #------------------------------------------------------------------------
 # Link to Python
 #------------------------------------------------------------------------
 LIB_NAME := Python
 VERSION  := 2.7
-LIB_HOME := 
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_python
-
-#------------------------------------------------------------------------
-# Link to Matlab libraries for mex files (only used if MATLAB_MEX is set)
-#------------------------------------------------------------------------
-include $(SIMCLIBS_HOME)/linkrules_patterns/linkrules_mex
+INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python2.7
 
 #------------------------------------------------------------------------
 # Include even more makerules
 #------------------------------------------------------------------------
 include $(LOCAL_HOME)/makerules.base
-
-#------------------------------------------------------------------------
-# Unit test libraries.
-# Link to different libraries used for Unit Testing, (only affecting <proj>/test dir)
-#------------------------------------------------------------------------
-
-UNIT_TEST_TYPE := 
-UNIT_TEST_TYPE_VERSION := 

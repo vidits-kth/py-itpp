@@ -243,9 +243,9 @@ void generate_itpp_mat_wrapper(char const * name) {
     //! Multiplication by a scalar
     .def(boost::python::self *= Num_T())
     //! Multiplication of two matrices
-    .def(boost::python::self * boost::python::other<itpp::Mat<Num_T> >())
+//    .def(boost::python::self * boost::python::other<itpp::Mat<Num_T> >())
     //! Multiplication of matrix \c m and vector \c v (column vector)
-    .def(boost::python::self * itpp::Vec<Num_T>())
+//    .def(boost::python::self * itpp::Vec<Num_T>())
     /*!
      * \brief Multiplication of vector \c v and matrix \c m with only one row
      *
@@ -257,11 +257,11 @@ void generate_itpp_mat_wrapper(char const * name) {
      * \note This operator is deprecated and might be removed or changed in
      * future releases of IT++.
      */
-    .def(itpp::Vec<Num_T>() * boost::python::self)
+//    .def(itpp::Vec<Num_T>() * boost::python::self)
     //! Multiplication of matrix and scalar
-    .def(boost::python::self * Num_T())
+//    .def(boost::python::self * Num_T())
     //! Multiplication of scalar and matrix
-    .def(Num_T() * boost::python::self)
+//    .def(Num_T() * boost::python::self)
 
     //! Element wise multiplication of two matrices
     .def("elem_mult", static_cast<itpp::Mat<Num_T> (*)(const itpp::Mat<Num_T> &, const itpp::Mat<Num_T> &)>(&itpp::elem_mult),

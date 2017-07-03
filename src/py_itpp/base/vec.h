@@ -84,18 +84,18 @@ void generate_itpp_vec_wrapper(char const * name) {
     .def("__getitem__", static_cast<const Num_T & (itpp::Vec<Num_T>::*)(int) const>(&itpp::Vec<Num_T>::operator()),
                                                   boost::python::return_value_policy<boost::python::copy_const_reference>())
     //! Sub-vector with elements from \c i1 to \c i2. Index -1 indicates the last element.
-    .def("__getitem__", static_cast<const itpp::Vec<Num_T> (itpp::Vec<Num_T>::*)(int, int) const>(&itpp::Vec<Num_T>::operator()),
-                                                           boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("__getitem__", static_cast<const itpp::Vec<Num_T> (itpp::Vec<Num_T>::*)(int, int) const>(&itpp::Vec<Num_T>::operator()),
+//                                                           boost::python::return_value_policy<boost::python::return_by_value>())
     //! Sub-vector where the elements are given by the list \c indexlist
-    .def("__getitem__", static_cast<const itpp::Vec<Num_T> (itpp::Vec<Num_T>::*)(const itpp::Vec<int> &) const>(&itpp::Vec<Num_T>::operator()),
-                                                           boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("__getitem__", static_cast<const itpp::Vec<Num_T> (itpp::Vec<Num_T>::*)(const itpp::Vec<int> &) const>(&itpp::Vec<Num_T>::operator()),
+//                                                           boost::python::return_value_policy<boost::python::return_by_value>())
 
     //! Accessor-style method. First element is 0
-    .def("get", static_cast<const Num_T & (itpp::Vec<Num_T>::*)(int) const>(&itpp::Vec<Num_T>::get),
-                                                               boost::python::return_value_policy<boost::python::copy_const_reference>())
+//    .def("get", static_cast<const Num_T & (itpp::Vec<Num_T>::*)(int) const>(&itpp::Vec<Num_T>::get),
+//                                                               boost::python::return_value_policy<boost::python::copy_const_reference>())
     //! Get the elements from \c i1 to \c i2. Index -1 indicates the last element.
-    .def("get", static_cast<itpp::Vec<Num_T>  (itpp::Vec<Num_T>::*)(int, int) const>(&itpp::Vec<Num_T>::get),
-                                                                   boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("get", static_cast<itpp::Vec<Num_T>  (itpp::Vec<Num_T>::*)(int, int) const>(&itpp::Vec<Num_T>::get),
+//                                                                   boost::python::return_value_policy<boost::python::return_by_value>())
     //! Get the elements in the vector where \c binlist is \c 1
     .def("get", static_cast<itpp::Vec<Num_T>  (itpp::Vec<Num_T>::*)(const itpp::Vec<itpp::bin> &) const>(&itpp::Vec<Num_T>::get),
                                                                    boost::python::return_value_policy<boost::python::return_by_value>())

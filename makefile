@@ -16,18 +16,7 @@ endif
 # Run the make command serially within this makefile
 .NOTPARALLEL:
 
-all: lib_dir version_control_report create_opt create_debug create_framepointer create_asan check_version_control_report
-
-opt: lib_dir version_control_report create_opt check_version_control_report
-debug: lib_dir version_control_report create_debug check_version_control_report
-framepointer: lib_dir version_control_report create_framepointer check_version_control_report
-asan: lib_dir version_control_report create_asan check_version_control_report
-cpuprof: lib_dir version_control_report create_cpuprof check_version_control_report
-heapprof: lib_dir version_control_report create_heapprof check_version_control_report
-shared: lib_dir version_control_report create_shared check_version_control_report
 pylib: lib_dir version_control_report create_pylib check_version_control_report
-
-include $(LOCAL_HOME)/makerules
 
 PLAIN_LIB_PATHS := $(subst -L,,$(LIB_PATH))
 LIB_FILES := $(foreach dir,$(PLAIN_LIB_PATHS),$(wildcard $(dir)/*))
@@ -70,97 +59,6 @@ version_control_report:
 
 check_version_control_report:
 	@$(SIMCLIBS_HOME)/bin/check_version_control_report.sh $(LOCAL_TARGET_DIR)/version_control_report.txt
-
-create_opt: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for opt mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_OPT)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i opt MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_debug: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for debug mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_DEBUG)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i debug MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_framepointer: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for framepointer mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_FRAMEPOINTER)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i framepointer MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_asan: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for asan mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_ASAN)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i asan MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_cpuprof: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for cpuprof mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_CPUPROF)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i framepointer MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_heapprof: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for heapprof mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_HEAPPROF)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i framepointer MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
-
-create_shared: readme.txt lib_dir
-	@echo "========================================================================="
-	@echo Compiling for shared mode
-	@echo "-------------------------------------------------------------------------"
-	@echo "FLAGS = $(FLAGS_SHARED)"
-	@echo "INCLUDE_PATH =  $(INCLUDE_PATH)"
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB = $(MATLAB)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_ARCH = $(MATLAB_ARCH)"; fi
-	@if test -n "$(MATLAB_MEX)"; then echo "MATLAB_FNAME_EXTENSION = $(MATLAB_MEX_FNAME_EXTENSION)"; fi
-	@if test -n "$(LOCAL_SOURCE_SUBDIRS)" ; then echo "LOCAL_SOURCE_SUBDIRS = $(LOCAL_SOURCE_SUBDIRS)"; fi
-	@echo "========================================================================="
-	@cd src && $(MAKE) -i shared MAKE=$(MAKE) CXX="${CXX}" LOCAL_HOME="$(LOCAL_HOME)"
 
 create_pylib: readme.txt lib_dir
 	@echo "========================================================================="

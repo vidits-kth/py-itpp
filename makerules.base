@@ -1,12 +1,8 @@
-# --------------------------------------------------------------------------
-# makerules.base file for SimCLibs projects
-# --------------------------------------------------------------------------
-
 #------------------------------------------------------------------------
 # Define architecture dependent compiler flags:
 #------------------------------------------------------------------------
-SIMD_CFLAG := $(shell find_simd_cflag.sh)
-ARCH_FLAGS := $(SIMD_CFLAG)
+#SIMD_CFLAG := $(shell find_simd_cflag.sh)
+#ARCH_FLAGS := $(SIMD_CFLAG)
 
 #------------------------------------------------------------------------
 # Define aux compiler flags
@@ -14,37 +10,13 @@ ARCH_FLAGS := $(SIMD_CFLAG)
 
 ADDITIONAL_COMPILER_FLAGS := $(ADDITIONAL_COMPILER_FLAGS) -DVCL_NAMESPACE=vcl -D_USE_MATH_DEFINES -DUSE_AVX -DPROJECT_NAME=\"$(LIB_BASE_NAME)\" $(MEX_COMPILER_FLAGS)
 
-ifdef CODE_COMMITTED
-  # Check that code is commited to repo
-  # Go over lib paths and concatenate the WC_VERSION_INFO on separate lines
-  WC_AND_LIB_VERSION_INFO := $(shell $(SIMCLIBS_HOME)/bin/check_working_copy_version.sh --svn $(LOCAL_HOME) | sed -e 's%$(SIMLIBS_REPO)%SIMLIBS_REPO%' -e 's/SIMLIBS_REPO/$$SIMLIBS_REPO/')
-  ADDITIONAL_COMPILER_FLAGS := $(ADDITIONAL_COMPILER_FLAGS) -DTAG=\"'$(WC_AND_LIB_VERSION_INFO)'\" -DVERSION_CONTROL_REPORT
-else
-  WC_AND_LIB_VERSION_INFO := (Not checked during build whether committed or not! Please use make CODE_COMMITTED=1 to enable checking.)
-endif
-
-ifeq ($(CODE_COMMITTED),enforce)
-# Enforce local commit
-NROF_NON_COMPLETE_COMMITS := $shell echo $(WC_AND_LIB_VERSION_INFO) | grep -c '(.*)')
-ifneq ($(NROF_NON_COMPLETE_COMMITS),0)
-$(error You have not properly committed your local working copy! Version control report: $(WC_AND_LIB_VERSION_INFO))
-endif
-endif
-
-FLAGS_COMMON      := -std=c++0x -Wall -Wnon-virtual-dtor -pipe -fPIC
+#FLAGS_COMMON      := -std=c++0x -Wall -Wnon-virtual-dtor -pipe -fPIC
 ifeq ($(FLAGS_FAST_MATH),disable)
 FLAGS_COMMON_MATH :=
 else
 FLAGS_COMMON_MATH := -fno-math-errno -fno-signed-zeros -fno-trapping-math -fassociative-math -fno-rounding-math -fno-signaling-nans -fcx-limited-range 
 endif
 
-FLAGS_OPT          := $(FLAGS_COMMON) $(ARCH_FLAGS) -O3 $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_DEBUG        := $(FLAGS_COMMON) $(ARCH_FLAGS) -ggdb3 $(FLAGS_COMMON_MATH) -D_GLIBCXX_DEBUG -DASSERT_LEVEL=2 $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_FRAMEPOINTER := $(FLAGS_COMMON) $(ARCH_FLAGS) -g -O3 -fno-omit-frame-pointer $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 -DUSE_FORTRAN_MATH_LIBS $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_ASAN         := $(FLAGS_COMMON) $(ARCH_FLAGS) -g -O3 -fno-omit-frame-pointer -fsanitize=address $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 -DUSE_FORTRAN_MATH_LIBS $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_CPUPROF      := $(FLAGS_COMMON) $(ARCH_FLAGS) -g -O3 -fno-omit-frame-pointer $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 -DUSE_FORTRAN_MATH_LIBS $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_HEAPPROF     := $(FLAGS_COMMON) $(ARCH_FLAGS) -g -O3 -fno-omit-frame-pointer $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 -DUSE_FORTRAN_MATH_LIBS $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
-FLAGS_SHARED       := $(FLAGS_COMMON) $(ARCH_FLAGS) -O3 -fPIC $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
 FLAGS_PYTHON       := $(FLAGS_COMMON) $(ARCH_FLAGS) -shared -O3 -fPIC -Wno-deprecated -Wno-unused $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
 
 #------------------------------------------------------------------------
@@ -70,10 +42,6 @@ LOCAL_TARGET_DIR            := $(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER
 #------------------------------------------------------------------------
 # Names of local libraries:
 #------------------------------------------------------------------------
-LOCAL_TARGET_OPT            := lib$(LIB_BASE_NAME).a
-LOCAL_TARGET_DEBUG          := lib$(LIB_BASE_NAME)_d.a
-LOCAL_TARGET_FRAMEPOINTER   := lib$(LIB_BASE_NAME)_fp.a
-LOCAL_TARGET_ASAN           := lib$(LIB_BASE_NAME)_asan.a
 LOCAL_TARGET_SHARED         := lib$(LIB_BASE_NAME).so
 
 #------------------------------------------------------------------------
@@ -84,20 +52,12 @@ LOCAL_LIBPATH               := -L$(LOCAL_TARGET_DIR)
 #------------------------------------------------------------------------
 # Lib-paths for local libraries:
 #------------------------------------------------------------------------
-LOCAL_LIB_OPT               := -l$(LIB_BASE_NAME)
-LOCAL_LIB_DEBUG             := -l$(LIB_BASE_NAME)_d
-LOCAL_LIB_FRAMEPOINTER      := -l$(LIB_BASE_NAME)_fp
-LOCAL_LIB_ASAN              := -l$(LIB_BASE_NAME)_asan
 LOCAL_LIB_SHARED            := -l$(LIB_BASE_NAME)
 LOCAL_LIB_PYTHON            := py_$(LIB_BASE_NAME)
 
 #------------------------------------------------------------------------
 # Define target libraries:
 #------------------------------------------------------------------------
-TARGET_LIB_OPT             := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_OPT)
-TARGET_LIB_DEBUG           := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_DEBUG)
-TARGET_LIB_FRAMEPOINTER    := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_FRAMEPOINTER)
-TARGET_LIB_ASAN            := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_ASAN)
 TARGET_LIB_SHARED          := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_SHARED)
 TARGET_LIB_PYTHON          := $(LOCAL_TARGET_DIR)/$(LOCAL_TARGET_PYTHON)
 
