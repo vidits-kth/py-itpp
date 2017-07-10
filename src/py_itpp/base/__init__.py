@@ -3,3 +3,4 @@ from vec import *
 from factory import *
 from binary import *
 from random import *
+from specmat import *
