@@ -3,7 +3,7 @@
 #include <itpp/base/matfunc.h>
 #include <boost/python.hpp>
 
-BOOST_PYTHON_MODULE(specmat)
+BOOST_PYTHON_MODULE(matfunc)
 {
 //
 ///*!
