@@ -16,7 +16,7 @@ endif
 # Run the make command serially within this makefile
 .NOTPARALLEL:
 
-pylib: lib_dir version_control_report create_pylib check_version_control_report
+pylib: lib_dir create_pylib check_version_control_report
 
 PLAIN_LIB_PATHS := $(subst -L,,$(LIB_PATH))
 LIB_FILES := $(foreach dir,$(PLAIN_LIB_PATHS),$(wildcard $(dir)/*))

@@ -33,8 +33,8 @@ $(TARGET_LIB_PYTHON): $(patsubst %.cpp,$(LOCAL_TARGET_DIR)/%.so,$(CPPSOURCES)) $
 $(LOCAL_TARGET_DIR)/%.so: %.cpp
 	@echo Compiling $< to Python module
 #	@echo LIBS_SHARED $(LIBS_SHARED)
-	@echo g++ ${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
-	@g++ ${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
+	@echo ${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
+	@${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
 
 $(LOCAL_TARGET_DIR)/%.so: %.c
 	@echo Compiling $< to Python module

@@ -72,14 +72,13 @@ if __name__ == '__main__':
     '''SNR range'''
     snrs_db = range(-10, 10) 
     
-    '''BER for uncoded bits over AWGN channel'''
+    print 'BER for uncoded bits over AWGN channel'
     ber_unc = [bit_error_ratio_uncoded_awgn(snr) for snr in snrs_db]
     
-    '''BER for Hamming (7, 4) coded  bits over AWGN channel'''
+    print 'BER for Hamming (7, 4) coded  bits over AWGN channel'
     ber = [bit_error_ratio_hamming_awgn(snr) for snr in snrs_db]
     
     plt.figure()
-    plt.hold(True)
     plt.grid(True)
     plt.semilogy(snrs_db, ber)
     plt.semilogy(snrs_db, ber_unc)
