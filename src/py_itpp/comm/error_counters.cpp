@@ -24,7 +24,8 @@ BOOST_PYTHON_MODULE(error_counters)
 //     BERC(int indelay = 0, int inignorefirst = 0, int inignorelast = 0);
 
     //! Cumulative error counter
-//    .def("count", &itpp::BERC::count)
+    .def("count", static_cast<void (itpp::BERC::*)(const itpp::bvec&,
+            									   const itpp::bvec&)>(&itpp::BERC::count))
 //    void count(const bvec &in1, const bvec &in2);
     //! Run this member function if the delay between \a in1 and
     //! \a in2 is unknown.
@@ -77,7 +78,8 @@ BOOST_PYTHON_MODULE(error_counters)
     .def("set_blocksize", &itpp::BLERC::set_blocksize)
 //    void set_blocksize(int inblocksize, bool clear = true);
     //! Calculate the number of block errors between \a in1 and \a in2
-//    .def("count", &itpp::BLERC::count)
+    .def("count", static_cast<void (itpp::BLERC::*)(const itpp::bvec&,
+            								 	    const itpp::bvec&)>(&itpp::BLERC::count))
 //    void count(const bvec &in1, const bvec &in2);
     //! Clear the block error counter
     .def("clear", &itpp::BLERC::clear)

@@ -125,22 +125,18 @@ if __name__ == '__main__':
     snrs_db = range(-10, 10) 
     block_size = 4
     
-    '''BLER for uncoded bits over AWGN channel'''
-    print 'Evaluating BLER for Uncoded (4,4) over AWGN'
+    print 'BLER for uncoded bits over AWGN channel'
     bler_unc = [block_error_ratio_uncoded_awgn(snr, block_size) for snr in snrs_db]
     
-    '''BLER for Hamming (7, 4) coded  bits over AWGN channel'''
-    print 'Evaluating BLER for Hamming (7,4) over AWGN'
+    print 'BLER for Hamming (7, 4) coded  bits over AWGN channel'
     bler = [block_error_ratio_hamming_awgn(snr, block_size) for snr in snrs_db]
     
-    '''BLER for Turbo coded  bits over AWGN channel, interleaver length 48 and code rate 0.33'''
-    print 'Evaluating BLER for Turbo (interleaver len 48, code rate 0.33) over AWGN'
+    print 'BLER for Turbo coded  bits over AWGN channel, interleaver length 48 and code rate 0.33'
     interleaver_length = 48
     bler_turbo = [block_error_ratio_turbo_awgn(snr, interleaver_length) for snr in snrs_db]
     
     print 'Plotting results'
     plt.figure()
-    plt.hold(True)
     plt.grid(True)
     plt.semilogy(snrs_db, bler_unc)
     plt.semilogy(snrs_db, bler)
