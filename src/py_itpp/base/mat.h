@@ -239,9 +239,9 @@ void generate_itpp_mat_wrapper(char const * name) {
 //    friend Mat<Num_T> operator-<>(const Mat<Num_T> &m);
 
     //! Matrix multiplication
-    .def(boost::python::self *= boost::python::other<itpp::Mat<Num_T> >())
+//    .def(boost::python::self *= boost::python::other<itpp::Mat<Num_T> >())
     //! Multiplication by a scalar
-    .def(boost::python::self *= Num_T())
+//    .def(boost::python::self *= Num_T())
     //! Multiplication of two matrices
 //    .def(boost::python::self * boost::python::other<itpp::Mat<Num_T> >())
     //! Multiplication of matrix \c m and vector \c v (column vector)
