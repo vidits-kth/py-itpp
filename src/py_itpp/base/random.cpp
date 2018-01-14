@@ -5,6 +5,46 @@
 
 BOOST_PYTHON_MODULE(random)
 {
+  // Random number generation from a Rayleigh distributed random variable.
+  boost::python::class_<itpp::Rayleigh_RNG>("Rayleigh_RNG", boost::python::init<>())
+
+    .def(boost::python::init<double>())
+
+    .def("setup", &itpp::Rayleigh_RNG::setup)
+
+	// Getters
+	.def("get_setup", &itpp::Rayleigh_RNG::get_setup)
+
+    .def("__getitem__", static_cast<double (itpp::Rayleigh_RNG::*)()>(&itpp::Rayleigh_RNG::operator()),
+                                   boost::python::return_value_policy<boost::python::return_by_value>())
+
+	.def("get_vec", static_cast<itpp::vec (itpp::Rayleigh_RNG::*)(int)>(&itpp::Rayleigh_RNG::operator()),
+								   boost::python::return_value_policy<boost::python::return_by_value>())
+
+	.def("get_mat", static_cast<itpp::mat (itpp::Rayleigh_RNG::*)(int, int)>(&itpp::Rayleigh_RNG::operator()),
+								   boost::python::return_value_policy<boost::python::return_by_value>())
+  ;
+
+  // Random number generation from a Rice distributed random variable.
+  boost::python::class_<itpp::Rice_RNG>("Rice_RNG", boost::python::init<>())
+
+	.def(boost::python::init<double, double>())
+
+    .def("setup", &itpp::Rice_RNG::setup)
+
+	// Getters
+	.def("get_setup", &itpp::Rice_RNG::get_setup)
+
+    .def("__getitem__", static_cast<double (itpp::Rice_RNG::*)()>(&itpp::Rice_RNG::operator()),
+                                   boost::python::return_value_policy<boost::python::return_by_value>())
+
+	.def("get_vec", static_cast<itpp::vec (itpp::Rice_RNG::*)(int)>(&itpp::Rice_RNG::operator()),
+								   boost::python::return_value_policy<boost::python::return_by_value>())
+
+	.def("get_mat", static_cast<itpp::mat (itpp::Rice_RNG::*)(int, int)>(&itpp::Rice_RNG::operator()),
+								   boost::python::return_value_policy<boost::python::return_by_value>())
+  ;
+
   //! Generates a random bit (equally likely 0s and 1s)
   boost::python::def("randb", static_cast<itpp::bin (*)()>(&itpp::randb), boost::python::return_value_policy<boost::python::return_by_value>());
 //  inline bin randb(void) { Bernoulli_RNG src; return src.sample(); }
