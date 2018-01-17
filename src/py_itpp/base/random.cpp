@@ -15,8 +15,8 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <itpp/base/random.h>
 #include <boost/python.hpp>
+#include <itpp/base/random.h>
 
 BOOST_PYTHON_MODULE(random)
 {
