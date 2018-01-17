@@ -1,9 +1,25 @@
-//! COPYRIGHT_NOTICE
+//! -------------------------------------------------------------------------
+//!
+//! Copyright (C) 2016 CC0 1.0 Universal (CC0 1.0)
+//!
+//! The person who associated a work with this deed has dedicated the work to
+//! the public domain by waiving all of his or her rights to the work
+//! worldwide under copyright law, including all related and neighboring
+//! rights, to the extent allowed by law.
+//!
+//! You can copy, modify, distribute and perform the work, even for commercial
+//! purposes, all without asking permission.
+//!
+//! See the complete legal text at
+//! <https://creativecommons.org/publicdomain/zero/1.0/legalcode>
+//!
+//! -------------------------------------------------------------------------
 
 #include <boost/python/numpy.hpp>
 #include "mat.h"
 
-// Convert Mat<Num_T> to Numpy array for Num_T=int,float,std::complex<double>
+//! Convert Mat<Num_T> to Numpy array
+//! for Num_T=int,float,std::complex<double>
 template<class Num_T>
 boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<Num_T> &m)
 {
@@ -23,7 +39,8 @@ boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<Num_T> 
   return np;
 }
 
-// Convert Mat<Num_T> to Numpy array for Num_T=itpp::bin
+//! Convert Mat<Num_T> to Numpy array
+//! for Num_T=itpp::bin
 template<>
 boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<itpp::bin> &m)
 {
@@ -43,59 +60,37 @@ boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<itpp::b
   return np;
 }
 
+//! Create wrappers within the mat module
 BOOST_PYTHON_MODULE(mat)
 {
-  /*!
-    \relates Mat
-    \brief Default Matrix Type
-  */
+  // Default Matrix Type
   generate_itpp_mat_wrapper<double>("mat");
 
-  /*!
-    \relates Mat
-    \brief Default Complex Matrix Type
-  */
+  // Default Complex Matrix Type
   generate_itpp_mat_wrapper<std::complex<double> >("cmat");
 
-  /*!
-    \relates Mat
-    \brief Default Float Matrix Type
-  */
+  // Default Float Matrix Type
   generate_itpp_mat_wrapper<float>("fmat");
 
-  /*!
-    \relates Mat
-    \brief Default Complex Float Matrix Type
-  */
+  // Default Complex Float Matrix Type
   generate_itpp_mat_wrapper<std::complex<float> >("cfmat");
 
-  /*!
-    \relates Mat
-    \brief Integer matrix
-  */
+  // Integer matrix
   generate_itpp_mat_wrapper<int>("imat");
 
-  /*!
-    \relates Mat
-    \brief short int matrix
-  */
+  // short int matrix
   generate_itpp_mat_wrapper<short int>("smat");
 
-  /*!
-    \relates Mat
-    \relates GF2mat
-    \relates GF2mat_sparse
-    \brief bin matrix
-  */
+  // bin matrix
   generate_itpp_mat_wrapper<itpp::bin>("bmat");
 
-  //! Conversion to Numpy NDarray
+  //! Extra functions for conversion to Numpy NDarrays
   Py_Initialize();
   boost::python::numpy::initialize();
 
-  def("mat_np", &_itpp_mat_to_numpy_ndarray<int>);
-  def("mat_np", &_itpp_mat_to_numpy_ndarray<float>);
-  def("mat_np", &_itpp_mat_to_numpy_ndarray<double>);
-  def("mat_np", &_itpp_mat_to_numpy_ndarray<std::complex<double> >);
-  def("mat_np", &_itpp_mat_to_numpy_ndarray<itpp::bin>);
+  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<int>);
+  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<float>);
+  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<double>);
+  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<std::complex<double> >);
+  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<itpp::bin>);
 }
