@@ -70,14 +70,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Bernoulli_RNG::get_setup)
 
-    .def("__call__", static_cast<itpp::bin (itpp::Bernoulli_RNG::*)()>
-                                (&itpp::Bernoulli_RNG::operator())
+    .def("__call__", static_cast<itpp::bin (itpp::Bernoulli_RNG::*)()>(&itpp::Bernoulli_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::bvec (itpp::Bernoulli_RNG::*)(int)>
-				(&itpp::Bernoulli_RNG::operator())
+    .def("__call__", static_cast<itpp::bvec (itpp::Bernoulli_RNG::*)(int)>(&itpp::Bernoulli_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::bmat (itpp::Bernoulli_RNG::*)(int, int)>
-				(&itpp::Bernoulli_RNG::operator())
+    .def("__call__", static_cast<itpp::bmat (itpp::Bernoulli_RNG::*)(int, int)>(&itpp::Bernoulli_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("sample", &itpp::Bernoulli_RNG::sample
@@ -99,14 +96,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::I_Uniform_RNG::get_setup)
 
-    .def("__call__", static_cast<int (itpp::I_Uniform_RNG::*)()>
-                                (&itpp::I_Uniform_RNG::operator())
+    .def("__call__", static_cast<int (itpp::I_Uniform_RNG::*)()>(&itpp::I_Uniform_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::ivec (itpp::I_Uniform_RNG::*)(int)>
-				(&itpp::I_Uniform_RNG::operator())
+    .def("__call__", static_cast<itpp::ivec (itpp::I_Uniform_RNG::*)(int)>(&itpp::I_Uniform_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::imat (itpp::I_Uniform_RNG::*)(int, int)>
-				(&itpp::I_Uniform_RNG::operator())
+    .def("__call__", static_cast<itpp::imat (itpp::I_Uniform_RNG::*)(int, int)>(&itpp::I_Uniform_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("sample", &itpp::I_Uniform_RNG::sample
@@ -122,14 +116,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Uniform_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Uniform_RNG::*)()>
-                                (&itpp::Uniform_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Uniform_RNG::*)()>(&itpp::Uniform_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Uniform_RNG::*)(int)>
-				(&itpp::Uniform_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Uniform_RNG::*)(int)>(&itpp::Uniform_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Uniform_RNG::*)(int, int)>
-				(&itpp::Uniform_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Uniform_RNG::*)(int, int)>(&itpp::Uniform_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("sample", &itpp::Uniform_RNG::sample
@@ -149,16 +140,13 @@ BOOST_PYTHON_MODULE(random)
 
     .def("setup", &itpp::Exponential_RNG::setup)
 
-    .def("get_setup", &itpp::Exponential_RNG::get_setup)
+//    .def("get_setup", &itpp::Exponential_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Exponential_RNG::*)()>
-                                (&itpp::Exponential_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Exponential_RNG::*)()>(&itpp::Exponential_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Exponential_RNG::*)(int)>
-				(&itpp::Exponential_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Exponential_RNG::*)(int)>(&itpp::Exponential_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Exponential_RNG::*)(int, int)>
-				(&itpp::Exponential_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Exponential_RNG::*)(int, int)>(&itpp::Exponential_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     ;
@@ -171,14 +159,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Normal_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Normal_RNG::*)()>
-                                (&itpp::Normal_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Normal_RNG::*)()>(&itpp::Normal_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Normal_RNG::*)(int)>
-				(&itpp::Normal_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Normal_RNG::*)(int)>(&itpp::Normal_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Normal_RNG::*)(int, int)>
-				(&itpp::Normal_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Normal_RNG::*)(int, int)>(&itpp::Normal_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("sample", &itpp::Normal_RNG::sample
@@ -200,14 +185,11 @@ BOOST_PYTHON_MODULE(random)
 
     // .def("get_setup", &itpp::Gamma_RNG::get_setup) // Not defined
 
-    .def("__call__", static_cast<double (itpp::Gamma_RNG::*)()>
-                                (&itpp::Gamma_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Gamma_RNG::*)()>(&itpp::Gamma_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Gamma_RNG::*)(int)>
-				(&itpp::Gamma_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Gamma_RNG::*)(int)>(&itpp::Gamma_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Gamma_RNG::*)(int, int)>
-				(&itpp::Gamma_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Gamma_RNG::*)(int, int)>(&itpp::Gamma_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     ;
@@ -220,14 +202,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Laplace_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Laplace_RNG::*)()>
-                                (&itpp::Laplace_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Laplace_RNG::*)()>(&itpp::Laplace_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Laplace_RNG::*)(int)>
-				(&itpp::Laplace_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Laplace_RNG::*)(int)>(&itpp::Laplace_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Laplace_RNG::*)(int, int)>
-				(&itpp::Laplace_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Laplace_RNG::*)(int, int)>(&itpp::Laplace_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("sample", &itpp::Laplace_RNG::sample
@@ -275,14 +254,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("reset", &itpp::AR1_Normal_RNG::reset)
 
-    .def("__call__", static_cast<double (itpp::AR1_Normal_RNG::*)()>
-                                (&itpp::AR1_Normal_RNG::operator())
+    .def("__call__", static_cast<double (itpp::AR1_Normal_RNG::*)()>(&itpp::AR1_Normal_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::AR1_Normal_RNG::*)(int)>
-				(&itpp::AR1_Normal_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::AR1_Normal_RNG::*)(int)>(&itpp::AR1_Normal_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::AR1_Normal_RNG::*)(int, int)>
-				(&itpp::AR1_Normal_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::AR1_Normal_RNG::*)(int, int)>(&itpp::AR1_Normal_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
     ;
 
@@ -297,14 +273,11 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Weibull_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Weibull_RNG::*)()>
-                                (&itpp::Weibull_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Weibull_RNG::*)()>(&itpp::Weibull_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::vec (itpp::Weibull_RNG::*)(int)>
-				(&itpp::Weibull_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Weibull_RNG::*)(int)>(&itpp::Weibull_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__call__", static_cast<itpp::mat (itpp::Weibull_RNG::*)(int, int)>
-				(&itpp::Weibull_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Weibull_RNG::*)(int, int)>(&itpp::Weibull_RNG::operator())
 		   , boost::python::return_value_policy<boost::python::return_by_value>())
     ;
 
@@ -317,16 +290,13 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Rayleigh_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Rayleigh_RNG::*)()>
-                                (&itpp::Rayleigh_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Rayleigh_RNG::*)()>(&itpp::Rayleigh_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
 
-    .def("__call__", static_cast<itpp::vec (itpp::Rayleigh_RNG::*)(int)>
-                                (&itpp::Rayleigh_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Rayleigh_RNG::*)(int)>(&itpp::Rayleigh_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
 
-    .def("__call__", static_cast<itpp::mat (itpp::Rayleigh_RNG::*)(int, int)>
-                                (&itpp::Rayleigh_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Rayleigh_RNG::*)(int, int)>(&itpp::Rayleigh_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
   ;
 
@@ -339,50 +309,64 @@ BOOST_PYTHON_MODULE(random)
 
     .def("get_setup", &itpp::Rice_RNG::get_setup)
 
-    .def("__call__", static_cast<double (itpp::Rice_RNG::*)()>
-                                (&itpp::Rice_RNG::operator())
+    .def("__call__", static_cast<double (itpp::Rice_RNG::*)()>(&itpp::Rice_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
 
-    .def("__call__", static_cast<itpp::vec (itpp::Rice_RNG::*)(int)>
-                                (&itpp::Rice_RNG::operator())
+    .def("__call__", static_cast<itpp::vec (itpp::Rice_RNG::*)(int)>(&itpp::Rice_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
 
-    .def("__call__", static_cast<itpp::mat (itpp::Rice_RNG::*)(int, int)>
-                                (&itpp::Rice_RNG::operator())
+    .def("__call__", static_cast<itpp::mat (itpp::Rice_RNG::*)(int, int)>(&itpp::Rice_RNG::operator())
                    , boost::python::return_value_policy<boost::python::return_by_value>())
   ;
 
-  boost::python::def("randb", static_cast<itpp::bin (*)()>(&itpp::randb), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randb", static_cast<itpp::bin (*)()>(&itpp::randb)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randb", static_cast<void (*)(int, itpp::bvec&)>(&itpp::randb));
-  boost::python::def("randb", static_cast<itpp::bvec (*)(int)>(&itpp::randb), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randb", static_cast<itpp::bvec (*)(int)>(&itpp::randb)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randb", static_cast<void (*)(int, int, itpp::bmat&)>(&itpp::randb));
-  boost::python::def("randb", static_cast<itpp::bmat (*)(int, int)>(&itpp::randb), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randb", static_cast<itpp::bmat (*)(int, int)>(&itpp::randb)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("randu", static_cast<double (*)()>(&itpp::randu), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randu", static_cast<double (*)()>(&itpp::randu)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randu", static_cast<void (*)(int, itpp::vec &)>(&itpp::randu));
-  boost::python::def("randu", static_cast<itpp::vec (*)(int)>(&itpp::randu), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randu", static_cast<itpp::vec (*)(int)>(&itpp::randu)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randu", static_cast<void (*)(int, int, itpp::mat &)>(&itpp::randu));
-  boost::python::def("randu", static_cast<itpp::mat (*)(int, int)>(&itpp::randu), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randu", static_cast<itpp::mat (*)(int, int)>(&itpp::randu)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("randi", static_cast<int (*)(int, int)>(&itpp::randi), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("randi", static_cast<itpp::ivec (*)(int, int, int)>(&itpp::randi), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("randi", static_cast<itpp::imat (*)(int, int, int, int)>(&itpp::randi), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randi", static_cast<int (*)(int, int)>(&itpp::randi)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randi", static_cast<itpp::ivec (*)(int, int, int)>(&itpp::randi)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randi", static_cast<itpp::imat (*)(int, int, int, int)>(&itpp::randi)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("randray", &itpp::randray);
 
-  boost::python::def("randrice", &itpp::randrice, boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randrice", &itpp::randrice
+                               , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("randexp", itpp::randexp, boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randexp", itpp::randexp
+                              , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("randn", static_cast<double (*)()>(&itpp::randn), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn", static_cast<double (*)()>(&itpp::randn)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randn", static_cast<void (*)(int, itpp::vec &)>(&itpp::randn));
-  boost::python::def("randn", static_cast<itpp::vec (*)(int)>(&itpp::randn), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn", static_cast<itpp::vec (*)(int)>(&itpp::randn)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randn", static_cast<void (*)(int, int, itpp::mat &)>(&itpp::randn));
-  boost::python::def("randn", static_cast<itpp::mat (*)(int, int)>(&itpp::randn), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn", static_cast<itpp::mat (*)(int, int)>(&itpp::randn)
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("randn_c", static_cast<std::complex<double> (*)()>(&itpp::randn_c), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn_c", static_cast<std::complex<double> (*)()>(&itpp::randn_c)
+                              , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randn_c", static_cast<void (*)(int, itpp::cvec &)>(&itpp::randn_c));
-  boost::python::def("randn_c", static_cast<itpp::cvec (*)(int)>(&itpp::randn_c), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn_c", static_cast<itpp::cvec (*)(int)>(&itpp::randn_c)
+                              , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("randn_c", static_cast<void (*)(int, int, itpp::cmat &)>(&itpp::randn_c));
-  boost::python::def("randn_c", static_cast<itpp::cmat (*)(int, int)>(&itpp::randn_c), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("randn_c", static_cast<itpp::cmat (*)(int, int)>(&itpp::randn_c)
+                              , boost::python::return_value_policy<boost::python::return_by_value>());
 }
