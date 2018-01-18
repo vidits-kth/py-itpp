@@ -18,47 +18,47 @@
 #include <boost/python.hpp>
 #include <itpp/base/binary.h>
 
-BOOST_PYTHON_MODULE(binary)
-  {
-    //! Binary class definition
-    boost::python::class_<itpp::bin>("bin", boost::python::init<>())
+BOOST_PYTHON_MODULE(binary) {
+
+  //! Binary class definition
+  boost::python::class_<itpp::bin>("bin", boost::python::init<>())
 
     .def(boost::python::init<const int>())
     .def(boost::python::init<const itpp::bin &>())
-
+  
     //! Assignment operator works differently in C++ and Python
     //.def(boost::python::self = int()) // use obj1 = bin(ord(obj1.value()) | obj2) instead
     //.def(boost::python::self = boost::python::other<itpp::bin>()) // use obj1 = obj1 | obj2 instead
-
+  
     .def(boost::python::self |= boost::python::other<itpp::bin>())
     .def(boost::python::self / boost::python::other<itpp::bin>())
     .def(boost::python::self | boost::python::other<itpp::bin>())
-
+  
     .def(boost::python::self += boost::python::other<itpp::bin>())
     .def(boost::python::self ^= boost::python::other<itpp::bin>())
     .def(boost::python::self + boost::python::other<itpp::bin>())
     .def(boost::python::self ^ boost::python::other<itpp::bin>())
     .def(boost::python::self -= boost::python::other<itpp::bin>())
     .def(boost::python::self - boost::python::other<itpp::bin>())
-
+  
     .def(-boost::python::self)
-
+  
     .def(boost::python::self *= boost::python::other<itpp::bin>())
     .def(boost::python::self &= boost::python::other<itpp::bin>())
     .def(boost::python::self * boost::python::other<itpp::bin>())
     .def(boost::python::self & boost::python::other<itpp::bin>())
-
+  
     .def(not boost::python::self)
     .def(~boost::python::self)
-
+  
     .def(boost::python::self == boost::python::other<itpp::bin>())
     .def(boost::python::self == boost::python::other<int>())
-
+  
     .def(boost::python::self != boost::python::self)
     .def(boost::python::self != boost::python::other<int>())
     .def(boost::python::self < boost::python::self)
     .def(boost::python::self <= boost::python::self)
-
+  
     //! Convert \c bin to \c short
     //!--- No supported method
     //! Convert \c bin to \c int
@@ -66,16 +66,16 @@ BOOST_PYTHON_MODULE(binary)
     //! Convert \c bin to \c bool
     //!--- No supported method
     //! Convert \c bin to \c float
- //   .def(boost::python::float_(boost::python::self))
+  //   .def(boost::python::float_(boost::python::self))
     //! Convert \c bin to \c double
     //!--- No supported method
-
+  
     .def("value", &itpp::bin::value
-	        , boost::python::return_value_policy<boost::python::return_by_value>())
-
+                , boost::python::return_value_policy<boost::python::return_by_value>())
+  
     .def(boost::python::self_ns::str(boost::python::self))
     ;
-
+  
     boost::python::def("abs", &itpp::abs
                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  }
+}
