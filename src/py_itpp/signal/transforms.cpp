@@ -21,21 +21,31 @@
 BOOST_PYTHON_MODULE(transforms)
 {
   boost::python::def("fft", static_cast<void (*)(const itpp::cvec &, itpp::cvec &)>(&itpp::fft));
-  boost::python::def("fft", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::fft), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("fft", static_cast<itpp::cvec (*)(const itpp::cvec &, const int)>(&itpp::fft), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("fft", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::fft)
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("fft", static_cast<itpp::cvec (*)(const itpp::cvec &, const int)>(&itpp::fft)
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("ifft", static_cast<void (*)(const itpp::cvec &, itpp::cvec &)>(&itpp::ifft));
-  boost::python::def("ifft", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::ifft), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("ifft", static_cast<itpp::cvec (*)(const itpp::cvec &, const int)>(&itpp::ifft), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("ifft", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::ifft)
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("ifft", static_cast<itpp::cvec (*)(const itpp::cvec &, const int)>(&itpp::ifft)
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("fft_real", static_cast<void (*)(const itpp::vec &, itpp::cvec &)>(&itpp::fft_real));
-  boost::python::def("fft_real", static_cast<itpp::cvec (*)(const itpp::vec &)>(&itpp::fft_real), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("fft_real", static_cast<itpp::cvec (*)(const itpp::vec &, const int)>(&itpp::fft_real), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("fft_real", static_cast<itpp::cvec (*)(const itpp::vec &)>(&itpp::fft_real)
+                               , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("fft_real", static_cast<itpp::cvec (*)(const itpp::vec &, const int)>(&itpp::fft_real)
+                               , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("ifft_real", static_cast<void (*)(const itpp::cvec &, itpp::vec &)>(&itpp::ifft_real));
-  boost::python::def("ifft_real", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::ifft_real), boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("ifft_real", static_cast<itpp::vec (*)(const itpp::cvec &, const int)>(&itpp::ifft_real), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("ifft_real", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::ifft_real)
+                                , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("ifft_real", static_cast<itpp::vec (*)(const itpp::cvec &, const int)>(&itpp::ifft_real)
+                                , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("dct", static_cast<void (*)(const itpp::vec &, itpp::vec &)>(&itpp::dct));
-  boost::python::def("dct", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::dct), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("dct", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::dct)
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("idct", static_cast<void (*)(const itpp::vec &, itpp::vec &)>(&itpp::idct));
-  boost::python::def("idct", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::idct), boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("idct", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::idct)
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
 }
