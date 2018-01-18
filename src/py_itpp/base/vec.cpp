@@ -1,4 +1,19 @@
-//! COPYRIGHT_NOTICE
+//! -------------------------------------------------------------------------
+//!
+//! Copyright (C) 2016 CC0 1.0 Universal (CC0 1.0)
+//!
+//! The person who associated a work with this deed has dedicated the work to
+//! the public domain by waiving all of his or her rights to the work
+//! worldwide under copyright law, including all related and neighboring
+//! rights, to the extent allowed by law.
+//!
+//! You can copy, modify, distribute and perform the work, even for commercial
+//! purposes, all without asking permission.
+//!
+//! See the complete legal text at
+//! <https://creativecommons.org/publicdomain/zero/1.0/legalcode>
+//!
+//! -------------------------------------------------------------------------
 
 #include <boost/python/numpy.hpp>
 #include "vec.h"
@@ -49,9 +64,9 @@ BOOST_PYTHON_MODULE(vec)
   Py_Initialize();
   boost::python::numpy::initialize();
 
-  def("vec_np", &_itpp_vec_to_numpy_ndarray<int>);
-  def("vec_np", &_itpp_vec_to_numpy_ndarray<float>);
-  def("vec_np", &_itpp_vec_to_numpy_ndarray<double>);
-  def("vec_np", &_itpp_vec_to_numpy_ndarray<std::complex<double> >);
-  def("vec_np", &_itpp_vec_to_numpy_ndarray<itpp::bin>);
+  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<int>);
+  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<float>);
+  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<double>);
+  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<std::complex<double> >);
+  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<itpp::bin>);
 }
