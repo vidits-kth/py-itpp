@@ -1,122 +1,81 @@
-/*---------------------------------------------------------------------------*/
-/*                                                                           */
-/*     Copyright (c) ERICSSON AB, 2002                                       */
-/*     The copyright to the document(s) herein is the property of            */
-/*     Ericsson AB, Sweden.                                                  */
-/*                                                                           */
-/*     The document(s) may be used and/or copied only with the written       */
-/*     permission from Ericsson AB or in accordance                          */
-/*     with the terms and conditions stipulated in the agreement contract    */
-/*     under which the document(s) have been supplied.                       */
-/*                                                                           */
-/*---------------------------------------------------------------------------*/
-
-/*!
-  \file
-  \brief Python wrapper over the itpp::bin class.
-
-  \author Vidit Saxena (EVIDSAX)
-  \rev    py_itpp0.0.1
-  \date   27 January 2017
-*/
+//! -------------------------------------------------------------------------
+//!
+//! Copyright (C) 2016 CC0 1.0 Universal (CC0 1.0)
+//!
+//! The person who associated a work with this deed has dedicated the work to
+//! the public domain by waiving all of his or her rights to the work
+//! worldwide under copyright law, including all related and neighboring
+//! rights, to the extent allowed by law.
+//!
+//! You can copy, modify, distribute and perform the work, even for commercial
+//! purposes, all without asking permission.
+//!
+//! See the complete legal text at
+//! <https://creativecommons.org/publicdomain/zero/1.0/legalcode>
+//!
+//! -------------------------------------------------------------------------
 
 #include <boost/python.hpp>
 #include <itpp/base/binary.h>
 
-using namespace boost::python;
-
 BOOST_PYTHON_MODULE(binary)
-{
+  {
+    //! Binary class definition
+    boost::python::class_<itpp::bin>("bin", boost::python::init<>())
 
-  //============================================================================
-  // Class "bin"
-  //============================================================================
-  class_<itpp::bin>("bin", init<>())
+    .def(boost::python::init<const int>())
+    .def(boost::python::init<const itpp::bin &>())
 
-    //! Set the binary object equal to \c value. Either "0" or "1".
-    .def(init<const int>())
-    //! Copy constructor
-    .def(init<const itpp::bin &>())
+    //! Assignment operator works differently in C++ and Python
+    //.def(boost::python::self = int()) // use obj1 = bin(ord(obj1.value()) | obj2) instead
+    //.def(boost::python::self = boost::python::other<itpp::bin>()) // use obj1 = obj1 | obj2 instead
 
-    //! Assign a value
-    //.def(self = int()) //!--- Not supported, use obj1 = bin(ord(obj1.value()) | obj2) instead
-    //! Assign a value
-    //.def(self = other<itpp::bin>()) //!--- Not supported, use obj1 = obj1 | obj2 instead
+    .def(boost::python::self |= boost::python::other<itpp::bin>())
+    .def(boost::python::self / boost::python::other<itpp::bin>())
+    .def(boost::python::self | boost::python::other<itpp::bin>())
 
-    //! OR
-    //void operator/=(const itpp::bin &inbin) { b |= inbin.b; }
-    //! OR
-    //.def(self |= other<itpp::bin>()) //!--- Works, suppressed in favor of single OR
-    //! OR
-    //.def(self / other<itpp::bin>()) //!--- Works, suppressed in favor of single OR
-    //! OR
-    .def(self | other<itpp::bin>())
+    .def(boost::python::self += boost::python::other<itpp::bin>())
+    .def(boost::python::self ^= boost::python::other<itpp::bin>())
+    .def(boost::python::self + boost::python::other<itpp::bin>())
+    .def(boost::python::self ^ boost::python::other<itpp::bin>())
+    .def(boost::python::self -= boost::python::other<itpp::bin>())
+    .def(boost::python::self - boost::python::other<itpp::bin>())
 
-    //! XOR
-    //.def(self += other<itpp::bin>()) //!--- Works, suppressed in favor of single XOR
-    //! XOR
-    //.def(self ^= other<itpp::bin>()) //!--- Works, suppressed in favor of single XOR
-    //! XOR
-    //.def(self + other<itpp::bin>()) //!--- Works, suppressed in favor of single XOR
-    //! XOR
-    .def(self ^ other<itpp::bin>())
-    //! XOR
-    //.def(self -= other<itpp::bin>()) //!--- Works, suppressed in favor of single XOR
-    //! XOR
-    // .def(self - other<itpp::bin>()) //!--- Works, suppressed in favor of single XOR
+    .def(-boost::python::self)
 
-    //! Dummy definition to be able to use vec<bin>
-    //.def(-self) //!--- Works, no perceived purpose
+    .def(boost::python::self *= boost::python::other<itpp::bin>())
+    .def(boost::python::self &= boost::python::other<itpp::bin>())
+    .def(boost::python::self * boost::python::other<itpp::bin>())
+    .def(boost::python::self & boost::python::other<itpp::bin>())
 
-    //! AND
-    //.def(self *= other<itpp::bin>()) //!--- Works, suppressed in favor of single AND
-    //! AND
-    //.def(self &= other<itpp::bin>()) //!--- Works, suppressed in favor of single AND
-    //! AND
-    //.def(self * other<itpp::bin>()) //!--- Works, suppressed in favor of single AND
-    //! AND
-    .def(self & other<itpp::bin>())
+    .def(not boost::python::self)
+    .def(~boost::python::self)
 
-    //! NOT
-    //.def(not self) //!--- Broken, "operator!" returns itpp::bin instead of bool
-    //! NOT
-    .def(~self)
+    .def(boost::python::self == boost::python::other<itpp::bin>())
+    .def(boost::python::self == boost::python::other<int>())
 
-    //! Check if equal
-    .def(self == other<itpp::bin>())
-    //! Check if equal
-    .def(self == other<int>())
-
-    //! Check if not equal
-    .def(self != self)
-    //! Check if not equal
-    .def(self != other<int>())
-    //! Less than (interpret the binary values {0,1} as integers)
-    .def(self < self)
-    //! Less than equal (interpret the binary values {0,1} as integers)
-    .def(self <= self)
+    .def(boost::python::self != boost::python::self)
+    .def(boost::python::self != boost::python::other<int>())
+    .def(boost::python::self < boost::python::self)
+    .def(boost::python::self <= boost::python::self)
 
     //! Convert \c bin to \c short
     //!--- No supported method
     //! Convert \c bin to \c int
-    //.def(int_(self)) //!--- Broken, calls to operator int/float/long ambiguous
+    //.def(int_(boost::python::self)) //!--- Broken, calls to operator int/float/long ambiguous
     //! Convert \c bin to \c bool
     //!--- No supported method
     //! Convert \c bin to \c float
-    .def(float_(self))
+ //   .def(boost::python::float_(boost::python::self))
     //! Convert \c bin to \c double
     //!--- No supported method
 
-    //! Output the binary value of the objectl
-    .def("value", &itpp::bin::value)
+    .def("value", &itpp::bin::value
+	        , boost::python::return_value_policy<boost::python::return_by_value>())
 
-    // Output stream of bin
-    .def(self_ns::str(self))
-;
+    .def(boost::python::self_ns::str(boost::python::self))
+    ;
 
-  //============================================================================
-  // Module-level utility functions
-  //============================================================================
-  //! absolute value of bin
-  //def("abs", &itpp::abs); //!--- No additional functionality
-}
+    boost::python::def("abs", &itpp::abs
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+  }
