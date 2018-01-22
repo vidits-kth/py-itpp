@@ -25,9 +25,121 @@ BOOST_PYTHON_MODULE(modulator)
       .value("APPROX", itpp::APPROX)
   ;
 
-  // Definition of 1D Modulator
+  //! Definition of 1D Modulator (with real symbols)
   generate_modulator<double>("modulator_1d");
 
-  // brief Definition of 2D Modulator (with complex symbols)
+  //! Definition of 2D Modulator (with complex symbols)
   generate_modulator<std::complex<double> >("modulator_2d");
+
+  //! M-ary QAM modulator with square lattice.
+  boost::python::class_<itpp::QAM>("QAM", boost::python::init<>())
+    .def(boost::python::init<int>())
+    .def("set_M", &itpp::QAM::set_M)
+
+    .def("demodulate_bits", static_cast<void (itpp::QAM::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::QAM::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::QAM::*)(const itpp::cvec &) const>(&itpp::QAM::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+  ;
+
+  //! M-ary QAM modulator with square lattice.
+  boost::python::class_<itpp::QAM>("QAM", boost::python::init<>())
+    .def(boost::python::init<int>())
+    .def("set_M", &itpp::QAM::set_M)
+
+    .def("demodulate_bits", static_cast<void (itpp::QAM::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::QAM::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::QAM::*)(const itpp::cvec &) const>(&itpp::QAM::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+  ;
+
+  //! M-ary PSK modulator.
+  boost::python::class_<itpp::PSK>("PSK", boost::python::init<>())
+    .def(boost::python::init<int>())
+    .def("set_M", &itpp::PSK::set_M)
+
+    .def("demodulate_bits", static_cast<void (itpp::PSK::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::PSK::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::PSK::*)(const itpp::cvec &) const>(&itpp::PSK::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+  ;
+
+  //! QPSK modulator.
+  boost::python::class_<itpp::QPSK>("QPSK", boost::python::init<>())
+    .def("demodulate_soft_bits", static_cast<void (itpp::QPSK::*)(const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::QPSK::*)(const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::QPSK::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::QPSK::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+  ;
+
+  //! BPSK modulator with complex symbols.
+  boost::python::class_<itpp::BPSK_c>("BPSK_c", boost::python::init<>())
+    .def("modulate_bits", static_cast<void (itpp::BPSK_c::*)(const itpp::bvec &, itpp::cvec &) const>(&itpp::BPSK_c::modulate_bits))
+    .def("modulate_bits", static_cast<itpp::cvec (itpp::BPSK_c::*)(const itpp::bvec &) const>(&itpp::BPSK_c::modulate_bits)
+                        , boost::python::return_value_policy<boost::python::return_by_value>())
+    .def("demodulate_bits", static_cast<void (itpp::BPSK_c::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::BPSK_c::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::BPSK_c::*)(const itpp::cvec &) const>(&itpp::BPSK_c::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::BPSK_c::*)(const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::BPSK_c::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::BPSK_c::*)(const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::BPSK_c::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::BPSK_c::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::BPSK_c::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::BPSK_c::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::BPSK_c::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+  ;
+
+  //! BPSK modulator with real symbols.
+  boost::python::class_<itpp::BPSK>("BPSK", boost::python::init<>())
+    .def("modulate_bits", static_cast<void (itpp::BPSK::*)(const itpp::bvec &, itpp::vec &) const>(&itpp::BPSK::modulate_bits))
+    .def("modulate_bits", static_cast<itpp::vec (itpp::BPSK::*)(const itpp::bvec &) const>(&itpp::BPSK::modulate_bits)
+                        , boost::python::return_value_policy<boost::python::return_by_value>())
+    .def("demodulate_bits", static_cast<void (itpp::BPSK::*)(const itpp::vec &, itpp::bvec &) const>(&itpp::BPSK::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::BPSK::*)(const itpp::vec &) const>(&itpp::BPSK::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::BPSK::*)(const itpp::vec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::BPSK::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::BPSK::*)(const itpp::vec &, double, itpp::Soft_Method) const>(&itpp::BPSK::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::BPSK::*)(const itpp::vec &, const itpp::vec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::BPSK::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::BPSK::*)(const itpp::vec &, const itpp::vec &, double, itpp::Soft_Method) const>(&itpp::BPSK::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+  ;
+
+  //! M-ary PAM modulator with complex symbols.
+  boost::python::class_<itpp::PAM_c>("PAM_c", boost::python::init<>())
+    .def(boost::python::init<int>())
+
+    .def("set_M", &itpp::PAM_c::set_M)
+
+    .def("demodulate_bits", static_cast<void (itpp::PAM_c::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::PAM_c::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::PAM_c::*)(const itpp::cvec &) const>(&itpp::PAM_c::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::PAM_c::*)(const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::PAM_c::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::PAM_c::*)(const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::PAM_c::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+    .def("demodulate_soft_bits", static_cast<void (itpp::PAM_c::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::PAM_c::demodulate_soft_bits))
+    .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::PAM_c::*)(const itpp::cvec &, const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::PAM_c::demodulate_soft_bits)
+                               , boost::python::return_value_policy<boost::python::return_by_value>())
+
+  ;
+
+  //! PAM modulator with real symbols.
+  boost::python::class_<itpp::PAM>("PAM", boost::python::init<>())
+    .def(boost::python::init<int>())
+
+    .def("set_M", &itpp::PAM::set_M)
+
+    .def("demodulate_bits", static_cast<void (itpp::PAM::*)(const itpp::vec &, itpp::bvec &) const>(&itpp::PAM::demodulate_bits))
+    .def("demodulate_bits", static_cast<itpp::bvec (itpp::PAM::*)(const itpp::vec &) const>(&itpp::PAM::demodulate_bits)
+                          , boost::python::return_value_policy<boost::python::return_by_value>())
+
+  ;
 }
