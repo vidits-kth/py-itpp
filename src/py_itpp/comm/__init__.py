@@ -15,6 +15,7 @@
 #
 # -------------------------------------------------------------------------
 
+from channel import *
 from error_counters import *
 from hammcode import *
 from interleave import *
