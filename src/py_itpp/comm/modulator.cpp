@@ -19,6 +19,8 @@
 
 BOOST_PYTHON_MODULE(modulator)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   // Soft demodulation methods
   boost::python::enum_<itpp::Soft_Method>("soft_method")
       .value("LOGMAP", itpp::LOGMAP)
@@ -32,17 +34,7 @@ BOOST_PYTHON_MODULE(modulator)
   generate_modulator<std::complex<double> >("modulator_2d");
 
   //! M-ary QAM modulator with square lattice.
-  boost::python::class_<itpp::QAM>("QAM", boost::python::init<>())
-    .def(boost::python::init<int>())
-    .def("set_M", &itpp::QAM::set_M)
-
-    .def("demodulate_bits", static_cast<void (itpp::QAM::*)(const itpp::cvec &, itpp::bvec &) const>(&itpp::QAM::demodulate_bits))
-    .def("demodulate_bits", static_cast<itpp::bvec (itpp::QAM::*)(const itpp::cvec &) const>(&itpp::QAM::demodulate_bits)
-                          , boost::python::return_value_policy<boost::python::return_by_value>())
-  ;
-
-  //! M-ary QAM modulator with square lattice.
-  boost::python::class_<itpp::QAM>("QAM", boost::python::init<>())
+  boost::python::class_<itpp::QAM, boost::python::bases<itpp::Modulator<std::complex<double> > > >("QAM", boost::python::init<>())
     .def(boost::python::init<int>())
     .def("set_M", &itpp::QAM::set_M)
 
@@ -52,7 +44,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! M-ary PSK modulator.
-  boost::python::class_<itpp::PSK>("PSK", boost::python::init<>())
+  boost::python::class_<itpp::PSK, boost::python::bases<itpp::Modulator<std::complex<double> > > >("PSK", boost::python::init<>())
     .def(boost::python::init<int>())
     .def("set_M", &itpp::PSK::set_M)
 
@@ -62,7 +54,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! QPSK modulator.
-  boost::python::class_<itpp::QPSK>("QPSK", boost::python::init<>())
+  boost::python::class_<itpp::QPSK, boost::python::bases<itpp::Modulator<std::complex<double> > > >("QPSK", boost::python::init<>())
     .def("demodulate_soft_bits", static_cast<void (itpp::QPSK::*)(const itpp::cvec &, double, itpp::vec &, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits))
     .def("demodulate_soft_bits", static_cast<itpp::vec (itpp::QPSK::*)(const itpp::cvec &, double, itpp::Soft_Method) const>(&itpp::QPSK::demodulate_soft_bits)
                                , boost::python::return_value_policy<boost::python::return_by_value>())
@@ -74,7 +66,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! BPSK modulator with complex symbols.
-  boost::python::class_<itpp::BPSK_c>("BPSK_c", boost::python::init<>())
+  boost::python::class_<itpp::BPSK_c, boost::python::bases<itpp::Modulator<std::complex<double> > > >("BPSK_c", boost::python::init<>())
     .def("modulate_bits", static_cast<void (itpp::BPSK_c::*)(const itpp::bvec &, itpp::cvec &) const>(&itpp::BPSK_c::modulate_bits))
     .def("modulate_bits", static_cast<itpp::cvec (itpp::BPSK_c::*)(const itpp::bvec &) const>(&itpp::BPSK_c::modulate_bits)
                         , boost::python::return_value_policy<boost::python::return_by_value>())
@@ -93,7 +85,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! BPSK modulator with real symbols.
-  boost::python::class_<itpp::BPSK>("BPSK", boost::python::init<>())
+  boost::python::class_<itpp::BPSK, boost::python::bases<itpp::Modulator<double> > >("BPSK", boost::python::init<>())
     .def("modulate_bits", static_cast<void (itpp::BPSK::*)(const itpp::bvec &, itpp::vec &) const>(&itpp::BPSK::modulate_bits))
     .def("modulate_bits", static_cast<itpp::vec (itpp::BPSK::*)(const itpp::bvec &) const>(&itpp::BPSK::modulate_bits)
                         , boost::python::return_value_policy<boost::python::return_by_value>())
@@ -112,7 +104,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! M-ary PAM modulator with complex symbols.
-  boost::python::class_<itpp::PAM_c>("PAM_c", boost::python::init<>())
+  boost::python::class_<itpp::PAM_c, boost::python::bases<itpp::Modulator<std::complex<double> > > >("PAM_c", boost::python::init<>())
     .def(boost::python::init<int>())
 
     .def("set_M", &itpp::PAM_c::set_M)
@@ -132,7 +124,7 @@ BOOST_PYTHON_MODULE(modulator)
   ;
 
   //! PAM modulator with real symbols.
-  boost::python::class_<itpp::PAM>("PAM", boost::python::init<>())
+  boost::python::class_<itpp::PAM, boost::python::bases<itpp::Modulator<double> > >("PAM", boost::python::init<>())
     .def(boost::python::init<int>())
 
     .def("set_M", &itpp::PAM::set_M)
