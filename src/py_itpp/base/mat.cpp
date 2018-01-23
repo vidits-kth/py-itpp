@@ -15,54 +15,13 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <boost/python/numpy.hpp>
 #include "mat.h"
-
-//! Convert Mat<Num_T> to Numpy array
-//! for Num_T=int,float,std::complex<double>
-template<class Num_T>
-boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<Num_T> &m)
-{
-  int rows = m.rows();
-  int cols = m.cols();
-
-  boost::python::tuple shape = boost::python::make_tuple(rows, cols);
-  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<Num_T>();
-  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
-
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      np[i][j] = m.get(i,j);
-    }
-  }
-
-  return np;
-}
-
-//! Convert Mat<Num_T> to Numpy array
-//! for Num_T=itpp::bin
-template<>
-boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<itpp::bin> &m)
-{
-  int rows = m.rows();
-  int cols = m.cols();
-
-  boost::python::tuple shape = boost::python::make_tuple(rows, cols);
-  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<bool>();
-  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
-
-  for (int i = 0; i < rows; i++) {
-    for (int j = 0; j < cols; j++) {
-      np[i][j] = static_cast<int>(m.get(i,j));
-    }
-  }
-
-  return np;
-}
 
 //! Create wrappers within the mat module
 BOOST_PYTHON_MODULE(mat)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   // Default Matrix Type
   generate_itpp_mat_wrapper<double>("mat");
 

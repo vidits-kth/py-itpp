@@ -17,11 +17,12 @@
 
 #include <sstream>
 #include <boost/python.hpp>
+#include <boost/python/numpy.hpp>
 #include <itpp/base/mat.h>
 
 //! Wrapper function to print itpp::Mat<Num_T> nicely in Python.
 template<class Num_T>
-std::string itpp_mat_print_wrap(const itpp::Mat<Num_T> &m)
+std::string _itpp_mat_print_wrap(const itpp::Mat<Num_T> &m)
 {
   int i, rows = m.rows();
   int j, cols = m.cols();
@@ -41,6 +42,48 @@ std::string itpp_mat_print_wrap(const itpp::Mat<Num_T> &m)
   oss << "]";
 
   return oss.str();
+}
+
+//! Convert Mat<Num_T> to Numpy array
+//! for Num_T=int,float,std::complex<double>
+template<class Num_T>
+boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<Num_T> &m)
+{
+  int rows = m.rows();
+  int cols = m.cols();
+
+  boost::python::tuple shape = boost::python::make_tuple(rows, cols);
+  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<Num_T>();
+  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
+
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      np[i][j] = m.get(i,j);
+    }
+  }
+
+  return np;
+}
+
+//! Convert Mat<Num_T> to Numpy array
+//! for Num_T=itpp::bin
+template<>
+boost::python::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<itpp::bin> &m)
+{
+  int rows = m.rows();
+  int cols = m.cols();
+
+  boost::python::tuple shape = boost::python::make_tuple(rows, cols);
+  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<bool>();
+  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
+
+  for (int i = 0; i < rows; i++) {
+    for (int j = 0; j < cols; j++) {
+      np[i][j] = static_cast<int>(m.get(i,j));
+    }
+  }
+
+  return np;
 }
 
 //! Wrapper function of templated functions related to Mat<Num_T>
@@ -252,8 +295,11 @@ void generate_itpp_mat_wrapper(char const * name) {
     .def(boost::python::self == boost::python::other<itpp::Mat<Num_T> >())
     .def(boost::python::self != boost::python::other<itpp::Mat<Num_T> >())
 
+    //! Additional method to support conversion to Numpy ndarray
+    .def("to_ndarray", &_itpp_mat_to_numpy_ndarray<Num_T>)
+
     //! Stream output
-    .def("__repr__", &itpp_mat_print_wrap<Num_T>)
-    .def("__str__", &itpp_mat_print_wrap<Num_T>)
+    .def("__repr__", &_itpp_mat_print_wrap<Num_T>)
+    .def("__str__", &_itpp_mat_print_wrap<Num_T>)
 ;
 }
