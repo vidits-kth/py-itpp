@@ -20,6 +20,8 @@
 
 BOOST_PYTHON_MODULE(hammcode)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   boost::python::class_<itpp::Hamming_Code>("hamming_code", boost::python::init<short>())
 
     .def("encode", static_cast<void (itpp::Hamming_Code::*)(const itpp::bvec &, itpp::bvec &)>(&itpp::Hamming_Code::encode))

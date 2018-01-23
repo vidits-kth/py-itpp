@@ -54,6 +54,8 @@ boost::python::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<itpp::b
 
 BOOST_PYTHON_MODULE(vec)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   generate_itpp_vec_wrapper<double>("vec");
   generate_itpp_vec_wrapper<std::complex<double> >("cvec");
   generate_itpp_vec_wrapper<int>("ivec");

@@ -20,6 +20,7 @@
 
 //! Definitions of special vectors and matrices
 BOOST_PYTHON_MODULE(specmat) {
+  boost::python::docstring_options local_docstring_options(true, true, false);
 
   boost::python::def("find", &itpp::find);
 

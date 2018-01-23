@@ -20,6 +20,8 @@
 
 BOOST_PYTHON_MODULE(error_counters)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   boost::python::class_<itpp::BERC>("BERC", boost::python::init<int, int, int>())
 
     .def("count", static_cast<void (itpp::BERC::*)(const itpp::bvec&, const itpp::bvec&)>(&itpp::BERC::count))

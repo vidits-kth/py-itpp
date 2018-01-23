@@ -20,6 +20,8 @@
 
 BOOST_PYTHON_MODULE(matfunc)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   boost::python::def("repmat", static_cast<itpp::vec (*)(const itpp::vec &, int)>(&itpp::repmat)
                              , boost::python::return_value_policy<boost::python::return_by_value>());
   boost::python::def("repmat", static_cast<itpp::cvec (*)(const itpp::cvec &, int)>(&itpp::repmat)

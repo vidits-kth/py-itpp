@@ -22,6 +22,8 @@
 //! Communication Channel Models
 BOOST_PYTHON_MODULE(channel)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   //! Predefined channel profiles. Includes LOS and Doppler spectrum settings.
   boost::python::enum_<itpp::CHANNEL_PROFILE>("CHANNEL_PROFILE")
     .value("ITU_Vehicular_A", itpp::ITU_Vehicular_A)

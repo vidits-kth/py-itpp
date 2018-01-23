@@ -19,6 +19,7 @@
 #include <itpp/base/binary.h>
 
 BOOST_PYTHON_MODULE(binary) {
+  boost::python::docstring_options local_docstring_options(true, true, false);
 
   //! Binary class definition
   boost::python::class_<itpp::bin>("bin", boost::python::init<>())

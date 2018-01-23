@@ -23,6 +23,8 @@ BOOST_PYTHON_MEMBER_FUNCTION_OVERLOADS(set_metric_overloads, itpp::Turbo_Codec::
 
 BOOST_PYTHON_MODULE(turbo)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   boost::python::class_<itpp::Turbo_Codec>("turbo_codec", boost::python::init<>())
 
     .def("set_parameters", &itpp::Turbo_Codec::set_parameters, set_parameters_overloads())

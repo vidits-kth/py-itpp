@@ -6,6 +6,7 @@ using namespace itpp;
 
 BOOST_PYTHON_MODULE(factory)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
 
   class_<Factory>("factory", init<>())
 

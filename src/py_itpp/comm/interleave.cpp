@@ -19,6 +19,8 @@
 
 BOOST_PYTHON_MODULE(interleave)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   generate_block_interleaver<double>("block_interleaver_double");
   generate_block_interleaver<short>("block_interleaver_short");
   generate_block_interleaver<int>("block_interleaver_int");

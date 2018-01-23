@@ -20,6 +20,8 @@
 
 BOOST_PYTHON_MODULE(random)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   //! Set of functions to work with global seed provider
   boost::python::def("GlobalRNG_reset", static_cast<void (*)(unsigned int)>(&itpp::GlobalRNG_reset));
   boost::python::def("GlobalRNG_reset", static_cast<void (*)()>(&itpp::GlobalRNG_reset));

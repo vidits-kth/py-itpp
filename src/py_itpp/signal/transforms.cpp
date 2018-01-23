@@ -20,6 +20,8 @@
 
 BOOST_PYTHON_MODULE(transforms)
 {
+  boost::python::docstring_options local_docstring_options(true, true, false);
+
   boost::python::def("fft", static_cast<void (*)(const itpp::cvec &, itpp::cvec &)>(&itpp::fft));
   boost::python::def("fft", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::fft)
                           , boost::python::return_value_policy<boost::python::return_by_value>());
