@@ -1,14 +1,11 @@
 # py-itpp
-Python Wrappers over IT++
+Python library for signal processing and communications research.
 
 # Description
-py-itpp is a Python library mainly for signal processing and communications. It is developed as a set of lightweight wrappers over the IT++ library (which is written in C++). The wrappers are use Boost.Python extensively and compile to a shared library that can be imported into Python.
+py-itpp is a Python library for signal processing and communications. It is developed as a set of lightweight wrappers over the IT++ library (which is written in C++). The wrappers use Boost.Python extensively and compile to a shared library that can be imported into Python. The py-itpp data structures can be easily converted to Numpy ndarrays for further processing and plotting. In addition to fast prototyping for signal processing and communications research, py-itpp is motivated by research into machine learning for communication systems.  
 
 # Documentation
-py-itpp mimics the IT++ API, and as such the original documentation should suffice for documentation of the modules, functions, and data structures: http://itpp.sourceforge.net/4.3.1/modules.html.  
-
-There are some exceptions to this rule, which are listed below:  
-IT++ Array class: Array is a template class, which is not supported in Python. However, py-itpp contains wrapper to the Array class along with a few pre-defined array types in Array.cpp (double, int, std::complex < double >), and new types may be defined in a similar manner. Note that py-itpp needs to be rebuilt every time a new Array type is added.
+py-itpp mimics the IT++ API, and as such the original documentation should suffice for documentation of the modules, functions, and data structures: http://itpp.sourceforge.net/4.3.1/modules.html. There are some exceptions to this rule as described in the wiki: https://github.com/vidits-kth/py-itpp/wiki/API-Notes  
 
 # Installation
 Prerequisites:  
