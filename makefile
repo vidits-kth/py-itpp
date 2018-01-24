@@ -6,13 +6,6 @@
 
 LOCAL_HOME        := $(shell pwd)
 
-# Don't use clearmake configuration record lookup for
-# readme files, it breaks compatibility
-# with GNU make
-ifeq ($(MAKE),clearmake)
-.NO_CONFIG_REC: readme.txt
-endif
-
 # Run the make command serially within this makefile
 .NOTPARALLEL:
 
