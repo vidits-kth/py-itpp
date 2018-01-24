@@ -16,11 +16,11 @@ PYSOURCES := $(shell find . \( -type d -a -name .svn -a -prune \) -o \( -type f 
 # Include prerequisites
 CPPDEPS := $(patsubst %.cpp,$(LOCAL_TARGET_DIR)/%.d,$(CPPSOURCES))
 
-sinclude $(CDEPS) $(CPPDEPS)
+include $(CPPDEPS)
 
 install:  $(TARGET_LIB_PYTHON)
 
-depend:  $(CDEPS) $(CPPDEPS)
+depend: $(CPPDEPS)
 
 # Python Module
 
