@@ -6,6 +6,3 @@ py-itpp is a Python library for signal processing and communications. It is deve
 
 ## Documentation
 py-itpp mimics the IT++ API, and as such the original documentation should suffice for documentation of the modules, functions, and data structures: http://itpp.sourceforge.net/4.3.1/modules.html. More details are found in the wiki: https://github.com/vidits-kth/py-itpp/wiki/  
-
-## Examples
-https://github.com/vidits-kth/py-radio-autoencoder  
