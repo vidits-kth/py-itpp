@@ -8,16 +8,16 @@
 # Define aux compiler flags
 #------------------------------------------------------------------------
 
-ADDITIONAL_COMPILER_FLAGS := $(ADDITIONAL_COMPILER_FLAGS) -DVCL_NAMESPACE=vcl -D_USE_MATH_DEFINES -DUSE_AVX -DPROJECT_NAME=\"$(LIB_BASE_NAME)\" $(MEX_COMPILER_FLAGS)
+#ADDITIONAL_COMPILER_FLAGS := $(ADDITIONAL_COMPILER_FLAGS) -DVCL_NAMESPACE=vcl -D_USE_MATH_DEFINES -DUSE_AVX -DPROJECT_NAME=\"$(LIB_BASE_NAME)\" $(MEX_COMPILER_FLAGS)
 
 #FLAGS_COMMON      := -std=c++0x -Wall -Wnon-virtual-dtor -pipe -fPIC
 ifeq ($(FLAGS_FAST_MATH),disable)
 FLAGS_COMMON_MATH :=
 else
-FLAGS_COMMON_MATH := -fno-math-errno -fno-signed-zeros -fno-trapping-math -fassociative-math -fno-rounding-math -fno-signaling-nans -fcx-limited-range 
+#FLAGS_COMMON_MATH := -fno-math-errno -fno-signed-zeros -fno-trapping-math -fassociative-math -fno-rounding-math -fno-signaling-nans -fcx-limited-range 
 endif
 
-FLAGS_PYTHON       := $(FLAGS_COMMON) $(ARCH_FLAGS) -shared -O3 -fPIC -Wno-deprecated -Wno-unused $(FLAGS_COMMON_MATH) -DNDEBUG -DASSERT_LEVEL=1 $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
+FLAGS_PYTHON       := $(FLAGS_COMMON) $(ARCH_FLAGS) -shared -O1 -fPIC $(FLAGS_COMMON_MATH) $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
 
 #------------------------------------------------------------------------
 # Define include path for the local library
