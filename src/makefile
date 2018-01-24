@@ -23,7 +23,6 @@ install:  $(TARGET_LIB_PYTHON)
 depend: $(CPPDEPS)
 
 # Python Module
-
 $(TARGET_LIB_PYTHON): $(patsubst %.cpp,$(LOCAL_TARGET_DIR)/%.so,$(CPPSOURCES))  $(patsubst %.py,$(LOCAL_TARGET_DIR)/%.py,$(PYSOURCES)) 
 
 $(LOCAL_TARGET_DIR)/%.so: %.cpp
@@ -31,8 +30,7 @@ $(LOCAL_TARGET_DIR)/%.so: %.cpp
 	@${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
 
 $(LOCAL_TARGET_DIR)/%.py: %.py
-	@echo Copying $< to Python module
-	@if [ -d $(LOCAL_TARGET_DIR)/py_itpp/utils ]; then continue; else mkdir -p $(LOCAL_TARGET_DIR)/py_itpp/utils; fi
+	@echo Copying $< to Python package
 	@cp -p $< $@
 	
 # Automatically generate prerequisites
