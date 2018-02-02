@@ -3,7 +3,7 @@ sudo apt-get -y install g++
 sudo apt-get -y install libblas-* liblapack-* libfftw-*
 sudo apt-get -y install make cmake
 sudo apt-get -y install python2.7* 
-sudo apt-get -y install python-dev python-numpy
+sudo apt-get -y install python-dev python-pip python-numpy
 
 mkdir ~/tmp
 cd ~/tmp
