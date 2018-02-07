@@ -5,6 +5,10 @@ sudo apt-get -y install make cmake
 sudo apt-get -y install python2.7* 
 sudo apt-get -y install python-dev python-pip python-tk python-numpy
 
+export LC_ALL="en_US.UTF-8"
+sudo pip install --upgrade pip
+sudo pip install matplotlib
+
 mkdir ~/tmp
 cd ~/tmp
 wget https://netcologne.dl.sourceforge.net/project/itpp/itpp/4.3.1/itpp-4.3.1.tar.gz
@@ -25,13 +29,5 @@ cd boost_1_66_0/
 sudo ./b2 install --with-python
 
 
-cd ~
-mkdir workspace
-cd workspace
-git clone https://github.com/vidits-kth/py-itpp.git
-cd py-itpp
-sudo make install
-
 cp ~/.bashrc ~/.bashrc.old
 echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib >> ~/.bashrc
-echo export PYTHONPATH=$PYTHONPATH:~/workspace/py-itpp/lib/gcc >> ~/.bashrc
