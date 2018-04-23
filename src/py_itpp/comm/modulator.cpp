@@ -30,6 +30,9 @@ BOOST_PYTHON_MODULE(modulator)
   //! Definition of 1D Modulator (with real symbols)
   generate_modulator<double>("modulator_1d");
 
+  //! Definition of 1D Modulator (with integer symbols)
+  generate_modulator<int>("modulator_1d_int");
+
   //! Definition of 2D Modulator (with complex symbols)
   generate_modulator<std::complex<double> >("modulator_2d");
 
