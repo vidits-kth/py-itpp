@@ -18,7 +18,7 @@
 #include <sstream>
 #include <boost/python.hpp>
 #include <itpp/base/vec.h>
-
+#include <itpp/base/math/elem_math.h>
 
 // Wrapper function to print Vec<Num_T> nicely in Python.
 template<class Num_T>
@@ -108,7 +108,7 @@ void generate_itpp_vec_wrapper(char const * name) {
 
     .def(boost::python::self -= boost::python::other<itpp::Vec<Num_T> >())
     .def(boost::python::self -= Num_T())
-    .def(boost::python::self -= boost::python::other<itpp::Vec<Num_T> >())
+    .def(boost::python::self - boost::python::other<itpp::Vec<Num_T> >())
     .def(boost::python::self + Num_T())
     .def(Num_T() + boost::python::self)
     // .def(-boost::python::self)
