@@ -22,3 +22,5 @@ from matfunc import *
 from random import *
 from specmat import *
 from vec import *
+
+from math import *
