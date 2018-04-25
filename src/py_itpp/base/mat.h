@@ -249,48 +249,48 @@ void generate_itpp_mat_wrapper(char const * name) {
     .def(boost::python::self * Num_T())
     .def(Num_T() * boost::python::self)
 
-    .def("elem_mult", static_cast<itpp::Mat<Num_T> (*)(const itpp::Mat<Num_T> &,
-                                                       const itpp::Mat<Num_T> &)>
-                                 (&itpp::elem_mult)
-                    , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               itpp::Mat<Num_T> &)>
-                                     (&itpp::elem_mult_out))
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               itpp::Mat<Num_T> &)>
-                                     (&itpp::elem_mult_out))
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &,
-                                               itpp::Mat<Num_T> &)>
-                                     (&itpp::elem_mult_out))
-    .def("elem_mult_inplace", static_cast<void (*)(const itpp::Mat<Num_T> &,
-                                                   itpp::Mat<Num_T> &)>
-                                         (&itpp::elem_mult_inplace))
-    .def("elem_mult_sum", static_cast<Num_T (*)(const itpp::Mat<Num_T> &,
-                                                const itpp::Mat<Num_T> &)>
-                                     (&itpp::elem_mult_sum)
-                        , boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("elem_mult", static_cast<itpp::Mat<Num_T> (*)(const itpp::Mat<Num_T> &,
+//                                                       const itpp::Mat<Num_T> &)>
+//                                 (&itpp::elem_mult)
+//                    , boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               itpp::Mat<Num_T> &)>
+//                                     (&itpp::elem_mult_out))
+//    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               itpp::Mat<Num_T> &)>
+//                                     (&itpp::elem_mult_out))
+//    .def("elem_mult_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &,
+//                                               itpp::Mat<Num_T> &)>
+//                                     (&itpp::elem_mult_out))
+//    .def("elem_mult_inplace", static_cast<void (*)(const itpp::Mat<Num_T> &,
+//                                                   itpp::Mat<Num_T> &)>
+//                                         (&itpp::elem_mult_inplace))
+//    .def("elem_mult_sum", static_cast<Num_T (*)(const itpp::Mat<Num_T> &,
+//                                                const itpp::Mat<Num_T> &)>
+//                                     (&itpp::elem_mult_sum)
+//                        , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def(boost::python::self /= Num_T())
     .def(boost::python::self / Num_T())
     .def(boost::python::self /= boost::python::other<itpp::Mat<Num_T> >())
 
-    .def("elem_div", static_cast<itpp::Mat<Num_T> (*)(const itpp::Mat<Num_T> &, const itpp::Mat<Num_T> &)>
-                                (&itpp::elem_div)
-                   , boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_div_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
-                                              const itpp::Mat<Num_T> &,
-                                              itpp::Mat<Num_T> &)>
-                                    (&itpp::elem_div_out))
-    .def("elem_div_sum", static_cast<Num_T (*)(const itpp::Mat<Num_T> &,
-                                               const itpp::Mat<Num_T> &)>
-                                    (&itpp::elem_mult_sum)
-                       , boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("elem_div", static_cast<itpp::Mat<Num_T> (*)(const itpp::Mat<Num_T> &, const itpp::Mat<Num_T> &)>
+//                                (&itpp::elem_div)
+//                   , boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("elem_div_out", static_cast<void (*)(const itpp::Mat<Num_T> &,
+//                                              const itpp::Mat<Num_T> &,
+//                                              itpp::Mat<Num_T> &)>
+//                                    (&itpp::elem_div_out))
+//    .def("elem_div_sum", static_cast<Num_T (*)(const itpp::Mat<Num_T> &,
+//                                               const itpp::Mat<Num_T> &)>
+//                                    (&itpp::elem_mult_sum)
+//                       , boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def(boost::python::self == boost::python::other<itpp::Mat<Num_T> >())
     .def(boost::python::self != boost::python::other<itpp::Mat<Num_T> >())

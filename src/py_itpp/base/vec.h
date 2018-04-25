@@ -43,6 +43,41 @@ std::string _print_wrap(const itpp::Vec<Num_T> &v)
 template<class Num_T>
 void generate_itpp_vec_wrapper(char const * name) {
 
+  boost::python::def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
+                                                    boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                                     const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
+                                                     boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                                     const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
+                                                     boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                            itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
+                                            boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                            const itpp::Vec<Num_T> &, itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
+                                            boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                            const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                            itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
+                                            boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("elem_mult_inplace", static_cast<void (*)(const itpp::Vec<Num_T> &, itpp::Vec<Num_T> &)>(&itpp::elem_mult_inplace),
+                                                boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_mult_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult_sum),
+                                             boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("elem_div", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div),
+                                                   boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_div", static_cast<itpp::Vec<Num_T> (*)(Num_T, const itpp::Vec<Num_T> &)>(&itpp::elem_div),
+                                                  boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_div_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
+                                            itpp::Vec<Num_T> &)>(&itpp::elem_div_out),
+                                           boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("elem_div_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div_sum),
+                                            boost::python::return_value_policy<boost::python::return_by_value>());
+
   //! Declaration of Vec
   boost::python::class_<itpp::Vec<Num_T> >(name, boost::python::init<>())
 
@@ -123,31 +158,6 @@ void generate_itpp_vec_wrapper(char const * name) {
     .def(boost::python::self * Num_T())
     .def(Num_T() * boost::python::self)
 
-    .def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
-                                                      boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                                       const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
-                                                       boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                                       const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult),
-                                                       boost::python::return_value_policy<boost::python::return_by_value>())
-
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                              itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
-                                              boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                              const itpp::Vec<Num_T> &, itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
-                                              boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                              const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                              itpp::Vec<Num_T> &)>(&itpp::elem_mult_out),
-                                              boost::python::return_value_policy<boost::python::return_by_value>())
-
-    .def("elem_mult_inplace", static_cast<void (*)(const itpp::Vec<Num_T> &, itpp::Vec<Num_T> &)>(&itpp::elem_mult_inplace),
-                                                  boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_mult_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult_sum),
-                                               boost::python::return_value_policy<boost::python::return_by_value>())
-
     .def(boost::python::self /= Num_T())
     .def(boost::python::self /= boost::python::other<itpp::Vec<Num_T> >())
 
@@ -155,17 +165,6 @@ void generate_itpp_vec_wrapper(char const * name) {
                                                      boost::python::return_value_policy<boost::python::return_by_value>())
     .def("__idiv__", static_cast<itpp::Vec<Num_T> (*)(Num_T, const itpp::Vec<Num_T> &)>(&itpp::operator/),
                                                      boost::python::return_value_policy<boost::python::return_by_value>())
-
-    .def("elem_div", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div),
-                                                     boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_div", static_cast<itpp::Vec<Num_T> (*)(Num_T, const itpp::Vec<Num_T> &)>(&itpp::elem_div),
-                                                    boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_div_out", static_cast<void (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
-                                              itpp::Vec<Num_T> &)>(&itpp::elem_div_out),
-                                             boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("elem_div_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div_sum),
-                                              boost::python::return_value_policy<boost::python::return_by_value>())
-
 
     .def("right", &itpp::Vec<Num_T>::right)
     .def("left", &itpp::Vec<Num_T>::left)
