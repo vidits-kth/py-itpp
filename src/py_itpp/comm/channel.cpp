@@ -186,7 +186,9 @@ BOOST_PYTHON_MODULE(channel)
     .def("set_LOS", static_cast<void (itpp::Channel_Specification::*)(int, double, double)>(&itpp::Channel_Specification::set_LOS))
     .def("set_LOS", static_cast<void (itpp::Channel_Specification::*)(const itpp::vec &, const itpp::vec &)>(&itpp::Channel_Specification::set_LOS))
 
-    .def("get_channel_profile", &itpp::Channel_Specification::get_channel_profile)
+    .def("get_channel_profile", &itpp::Channel_Specification::get_channel_profile
+                              , "Get both average power profile in dB and power delay profile in samples"
+                              , boost::python::args("self", "avg_power_dB", "delay_prof"))
     .def("get_avg_power_dB", &itpp::Channel_Specification::get_avg_power_dB)
     .def("get_delay_prof", &itpp::Channel_Specification::get_delay_prof)
 
