@@ -51,5 +51,15 @@ BOOST_PYTHON_MODULE(elem_math) {
 	                  , boost::python::args("x")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
+  boost::python::def("conj", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::conj)
+	                   , "Conjugate of complex vector"
+	                   , boost::python::args("v")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("conj", static_cast<itpp::cmat (*)(const itpp::cmat &)>(&itpp::conj)
+	                   , "Conjugate of complex matrix"
+	                   , boost::python::args("m")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
 }
 
