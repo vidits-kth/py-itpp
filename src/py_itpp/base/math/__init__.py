@@ -1,2 +1,2 @@
-from min_max import *
-from elem_math import *
+import min_max
+import elem_math
