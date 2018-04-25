@@ -46,17 +46,17 @@ void generate_min_max_wrapper() {
 			  , boost::python::args("v")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("min", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::max)
+  boost::python::def("min", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::min)
 		          , "Minimum value of vector, also returns the index position of min value"
 			  , boost::python::args("v", "index")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::max)
+  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::min)
 		          , "Minimum values over each row/column in the matrix m"
 			  , boost::python::args("m", "dim")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::max)
+  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::min)
 		          , "Minimum values over each row/column in the matrix m. Also returns a vector of indices with positions of minimum value within a column/row."
 			  , boost::python::args("m", "index", "dim")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
