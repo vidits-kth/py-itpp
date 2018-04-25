@@ -17,6 +17,8 @@
 
 #include <boost/python.hpp>
 #include <itpp/base/binary.h>
+#include <itpp/base/vec.h>
+#include <itpp/base/math/elem_math.h>
 
 BOOST_PYTHON_MODULE(binary) {
   boost::python::docstring_options local_docstring_options(true, true, false);
@@ -76,7 +78,8 @@ BOOST_PYTHON_MODULE(binary) {
   
     .def(boost::python::self_ns::str(boost::python::self))
     ;
-  
-    boost::python::def("abs", &itpp::abs
+
+    boost::python::def("abs", static_cast<int (*)(const itpp::bin &)>(&std::abs)
                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
 }
