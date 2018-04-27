@@ -15,41 +15,16 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <boost/python.hpp>
-#include <itpp/base/matfunc.h>
+#include "matfunc.h"
 
 BOOST_PYTHON_MODULE(matfunc)
 {
   boost::python::docstring_options local_docstring_options(true, true, false);
 
-  boost::python::def("repmat", static_cast<itpp::vec (*)(const itpp::vec &, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::cvec (*)(const itpp::cvec &, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::ivec (*)(const itpp::ivec &, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::svec (*)(const itpp::svec &, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::bvec (*)(const itpp::bvec &, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::mat (*)(const itpp::vec &, int, int, bool)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::cmat (*)(const itpp::cvec &, int, int, bool)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::imat (*)(const itpp::ivec &, int, int, bool)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::smat (*)(const itpp::svec &, int, int, bool)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::bmat (*)(const itpp::bvec &, int, int, bool)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::mat (*)(const itpp::mat &, int, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::cmat (*)(const itpp::cmat &, int, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::imat (*)(const itpp::imat &, int, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::smat (*)(const itpp::smat &, int, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
-  boost::python::def("repmat", static_cast<itpp::bmat (*)(const itpp::bmat &, int, int)>(&itpp::repmat)
-                             , boost::python::return_value_policy<boost::python::return_by_value>());
+  generate_matfunc_wrapper<double>();
+  generate_matfunc_wrapper<std::complex<double> >();
+  generate_matfunc_wrapper<int>();
+  generate_matfunc_wrapper<itpp::bin>();
+  generate_matfunc_wrapper<short>();
+
 }

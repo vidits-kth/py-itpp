@@ -32,6 +32,17 @@ void generate_matfunc_wrapper()
                           , boost::python::args("m", "dim")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
+  //! cumsum
+  boost::python::def("cumsum", static_cast<itpp::Vec<T> (*)(const itpp::Vec<T> &)>(&itpp::cumsum)
+                             , "Cumulative sum of all elements in the vector"
+                             , boost::python::args("v")
+                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("cumsum", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::sum)
+                             , "Cumulative sum of elements in the matrix m"
+                             , boost::python::args("m", "dim")
+                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
   //! repmat
   boost::python::def("repmat", static_cast<itpp::Vec<T> (*)(const itpp::Vec<T> &, int)>(&itpp::repmat)
                              , "Creates a vector with n copies of the vector v"
