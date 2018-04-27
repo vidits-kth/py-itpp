@@ -15,6 +15,8 @@
 //!
 //! -------------------------------------------------------------------------
 
+// Dummy change to force rebuild during make install
+
 #include <boost/python/numpy.hpp>
 #include "vec.h"
 

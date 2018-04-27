@@ -38,6 +38,36 @@ std::string _print_wrap(const itpp::Vec<Num_T> &v)
   return oss.str();
 }
 
+//! Copy data at the indices indicated by a binary vector
+template<class Num_T>
+void _copy_logical(itpp::Vec<Num_T> &v, const itpp::Vec<itpp::bin> &binlist, const itpp::Vec<Num_T> &v1)
+{
+  int size1 = v1.size();
+  it_assert_debug(v.length() == size1, "Vec<>::operator()(bvec &): "
+                  "Wrong size of data vector");
+
+  int size = binlist.size();
+  it_assert_debug(v.length() == size, "Vec<>::operator()(bvec &): "
+                  "Wrong size of binlist vector");
+
+  for (int i = 0; i < size; ++i)
+    if (binlist(i) == itpp::bin(1))
+      v(i) = v1[i];
+}
+
+//! Copy data at the indices indicated by a binary vector
+template<class Num_T>
+void _copy_logical(itpp::Vec<Num_T> &v, const itpp::Vec<itpp::bin> &binlist, const Num_T &val)
+{
+  int size = binlist.size();
+  it_assert_debug(v.length() == size, "Vec<>::operator()(bvec &): "
+                  "Wrong size of binlist vector");
+
+  for (int i = 0; i < size; ++i)
+    if (binlist(i) == itpp::bin(1))
+      v(i) = val;
+}
+
 //! Wrapper function of templated functions related to Vec<Num_T>
 //! and the definition of the templated class Vec<Num_T>
 template<class Num_T>
@@ -144,7 +174,7 @@ void generate_itpp_vec_wrapper(char const * name) {
     .def(boost::python::self -= boost::python::other<itpp::Vec<Num_T> >())
     .def(boost::python::self -= Num_T())
     .def(boost::python::self - boost::python::other<itpp::Vec<Num_T> >())
-    .def(boost::python::self + Num_T())
+    .def(boost::python::self - Num_T())
     .def(Num_T() + boost::python::self)
     // .def(-boost::python::self)
 
@@ -209,6 +239,14 @@ void generate_itpp_vec_wrapper(char const * name) {
     .def("set", static_cast<itpp::Vec<Num_T> & (itpp::Vec<Num_T> ::*)(const std::string &)>(&itpp::Vec<Num_T>::operator=)
               , boost::python::return_value_policy<boost::python::copy_non_const_reference>())
 
+    .def("copy_logical", static_cast<void (*)(itpp::Vec<Num_T> &, const itpp::Vec<itpp::bin> &, const itpp::Vec<Num_T> &)>(&_copy_logical<Num_T>)
+                       , "Copy data at the indices indicated by a binary vector"
+                       , boost::python::args("v", "binlist", "v1"))
+
+    .def("copy_logical", static_cast<void (*)(itpp::Vec<Num_T> &, const itpp::Vec<itpp::bin> &, const Num_T &)>(&_copy_logical<Num_T>)
+                       , "Copy data at the indices indicated by a binary vector"
+                       , boost::python::args("v", "binlist", "val"))
+
     .def(boost::python::self == Num_T())
     .def(boost::python::self != Num_T())
     .def(boost::python::self < Num_T())
@@ -251,5 +289,9 @@ void generate_itpp_vec_wrapper(char const * name) {
                                                  const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
                                                  const itpp::Vec<Num_T> &)>(&itpp::concat),
                                                 boost::python::return_value_policy<boost::python::return_by_value>());
+
+//  boost::python::def("set", static_cast<void (*)(itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &, const itpp::Vec<itpp::bin> &)>(&_set_from_binlist<Num_T>));
+
+//  boost::python::def("set", static_cast<void (*)(itpp::Vec<Num_T> &, const Num_T &, const itpp::Vec<itpp::bin> &)>(&_set_from_value<Num_T>));
 
 }
