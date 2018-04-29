@@ -27,4 +27,15 @@ BOOST_PYTHON_MODULE(matfunc)
   generate_matfunc_wrapper<itpp::bin>();
   generate_matfunc_wrapper<short>();
 
+  //! sqrtm
+  boost::python::def("sqrtm", static_cast<itpp::cmat (*)(const itpp::cmat &)>(&itpp::sqrtm)
+                            , "Square root of the complex square matrix m"
+                            , boost::python::args("m")
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("sqrtm", static_cast<itpp::cmat (*)(const itpp::mat &)>(&itpp::sqrtm)
+                            , "Square root of the real square matrix m"
+                            , boost::python::args("m")
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+
 }
