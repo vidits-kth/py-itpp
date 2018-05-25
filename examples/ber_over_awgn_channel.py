@@ -17,6 +17,9 @@
 
 import py_itpp as pyp
 
+import matplotlib
+matplotlib.use("tkagg")
+
 from matplotlib import pyplot as plt
 
 def bit_error_ratio_uncoded_awgn(snr_db):
@@ -63,7 +66,7 @@ def bit_error_ratio_hamming_awgn(snr_db):
     tx_signal = modulator_.modulate_bits(encoded_bits)
     
     '''Add the effect of channel to the signal'''
-    noise_variance = 1.0 / (pow(10, 0.1 * snr))
+    noise_variance = 1.0 / (pow(10, 0.1 * snr_db))
     noise = pyp.random.randn(tx_signal.length())
     noise *= pyp.elem_math.sqrt(noise_variance)
     rx_signal = tx_signal + noise
@@ -81,10 +84,10 @@ if __name__ == '__main__':
     '''SNR range'''
     snrs_db = range(-10, 10) 
     
-    print 'BER for uncoded bits over AWGN channel'
+    print('BER for uncoded bits over AWGN channel')
     ber_unc = [bit_error_ratio_uncoded_awgn(snr) for snr in snrs_db]
     
-    print 'BER for Hamming (7, 4) coded  bits over AWGN channel'
+    print('BER for Hamming (7, 4) coded  bits over AWGN channel')
     ber = [bit_error_ratio_hamming_awgn(snr) for snr in snrs_db]
     
     plt.figure()
