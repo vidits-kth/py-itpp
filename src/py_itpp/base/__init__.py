@@ -15,12 +15,12 @@
 #
 # -------------------------------------------------------------------------
 
-from math import *
+from .math import *
 
-import binary
-import factory
-import mat
-import matfunc
-import random
-import specmat
-import vec
+from . import binary
+from . import factory
+from . import mat
+from . import matfunc
+from . import random
+from . import specmat
+from . import vec

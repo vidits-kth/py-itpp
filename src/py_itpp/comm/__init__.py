@@ -15,9 +15,9 @@
 #
 # -------------------------------------------------------------------------
 
-import channel
-import error_counters
-import hammcode
-import interleave
-import modulator
-import turbo
+from . import channel
+from . import error_counters
+from . import hammcode
+from . import interleave
+from . import modulator
+from . import turbo
