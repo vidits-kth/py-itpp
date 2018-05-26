@@ -16,6 +16,7 @@
 # -------------------------------------------------------------------------
 
 from . import channel
+from . import convcode
 from . import error_counters
 from . import hammcode
 from . import interleave
