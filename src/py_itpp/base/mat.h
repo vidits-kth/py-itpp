@@ -295,11 +295,14 @@ void generate_itpp_mat_wrapper(char const * name) {
     .def(boost::python::self == boost::python::other<itpp::Mat<Num_T> >())
     .def(boost::python::self != boost::python::other<itpp::Mat<Num_T> >())
 
-    //! Additional method to support conversion to Numpy ndarray
-    .def("to_ndarray", &_itpp_mat_to_numpy_ndarray<Num_T>)
-
     //! Stream output
     .def("__repr__", &_itpp_mat_print_wrap<Num_T>)
     .def("__str__", &_itpp_mat_print_wrap<Num_T>)
+
+    //! Additional method to support conversion to Numpy ndarray
+    .def("to_numpy_ndarray", &_itpp_mat_to_numpy_ndarray<Num_T>
+                           , "Convert py-itpp matrix to numpy ndarray of corresponding datatype"
+			   , boost::python::args("self")
+                           , boost::python::return_value_policy<boost::python::return_by_value>())
 ;
 }

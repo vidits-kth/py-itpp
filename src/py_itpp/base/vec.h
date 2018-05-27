@@ -68,6 +68,40 @@ void _copy_logical(itpp::Vec<Num_T> &v, const itpp::Vec<itpp::bin> &binlist, con
       v(i) = val;
 }
 
+// Convert Vec<Num_T> to Numpy array for Num_T=int,float,std::complex<double>
+template<class Num_T>
+boost::python::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<Num_T> &v)
+{
+  int i, sz = v.length();
+
+  boost::python::tuple shape = boost::python::make_tuple(sz);
+  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<Num_T>();
+  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
+
+  for (i = 0; i < sz; i++) {
+    np[i] = v(i);
+  }
+
+  return np;
+}
+
+// Convert Vec<Num_T> to Numpy array for Num_T=itpp::bin
+template<>
+boost::python::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<itpp::bin> &v)
+{
+  int i, sz = v.length();
+
+  boost::python::tuple shape = boost::python::make_tuple(sz);
+  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<bool>();
+  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
+
+  for (i = 0; i < sz; i++) {
+    np[i] = (int)v(i);
+  }
+
+  return np;
+}
+
 //! Wrapper function of templated functions related to Vec<Num_T>
 //! and the definition of the templated class Vec<Num_T>
 template<class Num_T>
@@ -265,6 +299,13 @@ void generate_itpp_vec_wrapper(char const * name) {
     .def("__repr__", &_print_wrap<Num_T>)
     //! Stream output
     .def("__str__", &_print_wrap<Num_T>)
+
+    //! Additional method to support conversion to Numpy ndarray
+    .def("to_numpy_ndarray", &_itpp_vec_to_numpy_ndarray<Num_T>
+                           , "Convert py-itpp vector to numpy ndarray of corresponding datatype"
+                           , boost::python::args("self")
+                           , boost::python::return_value_policy<boost::python::return_by_value>())
+
   ;
 
 

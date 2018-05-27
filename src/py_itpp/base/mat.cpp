@@ -47,9 +47,4 @@ BOOST_PYTHON_MODULE(mat)
   Py_Initialize();
   boost::python::numpy::initialize();
 
-  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<int>);
-  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<float>);
-  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<double>);
-  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<std::complex<double> >);
-  def("to_ndarray", &_itpp_mat_to_numpy_ndarray<itpp::bin>);
 }

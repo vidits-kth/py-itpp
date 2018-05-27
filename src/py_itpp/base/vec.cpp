@@ -20,40 +20,6 @@
 #include <boost/python/numpy.hpp>
 #include "vec.h"
 
-// Convert Vec<Num_T> to Numpy array for Num_T=int,float,std::complex<double>
-template<class Num_T>
-boost::python::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<Num_T> &v)
-{
-  int i, sz = v.length();
-
-  boost::python::tuple shape = boost::python::make_tuple(sz);
-  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<Num_T>();
-  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
-
-  for (i = 0; i < sz; i++) {
-    np[i] = v(i);
-  }
-
-  return np;
-}
-
-// Convert Vec<Num_T> to Numpy array for Num_T=itpp::bin
-template<>
-boost::python::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<itpp::bin> &v)
-{
-  int i, sz = v.length();
-
-  boost::python::tuple shape = boost::python::make_tuple(sz);
-  boost::python::numpy::dtype dtype = boost::python::numpy::dtype::get_builtin<bool>();
-  boost::python::numpy::ndarray np = boost::python::numpy::zeros(shape, dtype);
-
-  for (i = 0; i < sz; i++) {
-    np[i] = (int)v(i);
-  }
-
-  return np;
-}
-
 BOOST_PYTHON_MODULE(vec)
 {
   boost::python::docstring_options local_docstring_options(true, true, false);
@@ -68,9 +34,4 @@ BOOST_PYTHON_MODULE(vec)
   Py_Initialize();
   boost::python::numpy::initialize();
 
-  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<int>);
-  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<float>);
-  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<double>);
-  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<std::complex<double> >);
-  def("to_ndarray", &_itpp_vec_to_numpy_ndarray<itpp::bin>);
 }
