@@ -18,12 +18,38 @@
 #include <boost/python.hpp>
 #include <itpp/base/math/log_exp.h>
 
+// Extra functions for primitive types
+inline double pow(const double x, const double y) { return std::pow(x, y); }
+
 inline double log2(const double &x) { return std::log(x) / std::log(2.0); }
 
 BOOST_PYTHON_MODULE(log_exp) {
   boost::python::docstring_options local_docstring_options(true, true, false);
 
-  // -------------------- log2 function --------------------
+  boost::python::def("pow", static_cast<double (*)(const double, const double)>(&pow)
+	                   , "Calculates x to the power of y (x^y)"
+	                   , boost::python::args("x", "y")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow", static_cast<itpp::vec (*)(const double, const itpp::vec &)>(&itpp::pow)
+	                   , "Calculates x to the power of y (x^y)"
+	                   , boost::python::args("x", "y")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow", static_cast<itpp::mat (*)(const double, const itpp::mat &)>(&itpp::pow)
+	                   , "Calculates x to the power of y (x^y)"
+	                   , boost::python::args("x", "y")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow", static_cast<itpp::vec (*)(const itpp::vec &, const double)>(&itpp::pow)
+	                   , "Calculates x to the power of y (x^y)"
+	                   , boost::python::args("x", "y")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow", static_cast<itpp::mat (*)(const itpp::mat &, const double)>(&itpp::pow)
+	                   , "Calculates x to the power of y (x^y)"
+	                   , boost::python::args("x", "y")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("log2", static_cast<double (*)(const double &)>(&log2)
 	                   , "log-2 of the element"
@@ -35,8 +61,24 @@ BOOST_PYTHON_MODULE(log_exp) {
 	                   , boost::python::args("v")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("mat", static_cast<itpp::mat (*)(const itpp::mat &)>(&itpp::log2)
+  boost::python::def("log2", static_cast<itpp::mat (*)(const itpp::mat &)>(&itpp::log2)
 	                   , "log-2 of the elements"
 	                   , boost::python::args("m")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("inv_dB", static_cast<double (*)(double)>(&itpp::inv_dB)
+  	                     , "Calulates the inverse of dB, 10^(x/10)"
+  	                     , boost::python::args("x")
+                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("inv_dB", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::inv_dB)
+  	                     , "Calulates the inverse of dB, 10^(x/10)"
+  	                     , boost::python::args("v")
+                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("inv_dB", static_cast<itpp::mat (*)(const itpp::mat &)>(&itpp::inv_dB)
+  	                     , "Calulates the inverse of dB, 10^(x/10)"
+  	                     , boost::python::args("m")
+                             , boost::python::return_value_policy<boost::python::return_by_value>());
+
 }
