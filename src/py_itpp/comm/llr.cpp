@@ -22,6 +22,12 @@ BOOST_PYTHON_MODULE(llr) {
 
   boost::python::docstring_options local_docstring_options(true, true, false);
 
+//  boost::python::class_<itpp::QLLR>("QLLR");
+
+  boost::python::class_<itpp::QLLRvec>("QLLRvec");
+
+  boost::python::class_<itpp::QLLRmat>("QLLRmat");
+
   boost::python::class_<itpp::LLR_calc_unit>("LLR_calc_unit", boost::python::init<>("Constructor, using the default table resolution", boost::python::args("self")))
 
     .def(boost::python::init<short int, short int, short int>("Constructor, using a specific table resolution.", boost::python::args("self", "Dint1", "Dint2", "Dint3")))
