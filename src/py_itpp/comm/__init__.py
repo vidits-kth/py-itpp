@@ -21,4 +21,5 @@ from . import error_counters
 from . import hammcode
 from . import interleave
 from . import modulator
+from . import modulator_nd
 from . import turbo

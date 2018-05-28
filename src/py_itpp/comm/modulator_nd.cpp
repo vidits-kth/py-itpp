@@ -208,7 +208,7 @@ BOOST_PYTHON_MODULE(modulator_nd) {
 
 
   boost::python::class_<itpp::ND_UQAM, boost::python::bases<itpp::Modulator_NCD> >("ND_UQAM",
-										   boost::python::init<int, int>("Constructor", boost::python::args("self", "int", "Mary")))
+										   boost::python::init<int, int>("Constructor", boost::python::args("self", "Nt", "Mary")))
     .def("set_M", static_cast<void (itpp::ND_UQAM::*)(int, int)>(&itpp::ND_UQAM::set_M)
 	        , "Set component modulators to M-QAM with Gray mapping"
 		, boost::python::args("self", "Nt", "Mary"))
