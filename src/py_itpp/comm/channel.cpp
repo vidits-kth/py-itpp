@@ -100,7 +100,7 @@ BOOST_PYTHON_MODULE(channel)
                             , "Set FIR filter length (for FIR fading generator)"
 			    , boost::python::args("self", "filter_length"))
     .def("set_norm_doppler", &itpp::Fading_Generator::set_norm_doppler
-                           , "Set normalized Doppler (for correlated fading generators)"
+                           , "Set normalized Doppler (for correlated fading generators). The normalized Doppler is defined as the multiplication of the maximum Doppler frequency by the sampling time "
 			   , boost::python::args("self", "norm_doppler"))
     .def("set_doppler_spectrum", &itpp::Fading_Generator::set_doppler_spectrum
                                , "Set Doppler spectrum (for Rice fading generator)"
