@@ -18,6 +18,7 @@
 from .math import *
 
 from . import binary
+from . import itfile
 from . import factory
 from . import mat
 from . import matfunc
