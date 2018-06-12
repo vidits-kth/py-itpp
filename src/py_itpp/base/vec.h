@@ -220,10 +220,12 @@ void generate_itpp_vec_wrapper(char const * name) {
                                                            const itpp::Vec<Num_T> &, bool)>(&itpp::outer_product),
                                                           boost::python::return_value_policy<boost::python::return_by_value>())
     .def(boost::python::self * Num_T())
+    .def(Num_T() * boost::python::self)
     .def(boost::python::self *= Num_T())
     .def(boost::python::self * boost::python::other<itpp::Vec<Num_T> >())
 
     .def(boost::python::self / Num_T())
+    .def(Num_T() / boost::python::self)
     .def(boost::python::self /= Num_T())
     .def(boost::python::self /= boost::python::other<itpp::Vec<Num_T> >())
 
