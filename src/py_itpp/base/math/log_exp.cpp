@@ -21,15 +21,9 @@
 // Extra functions for primitive types
 inline double exp(const double x) { return std::exp(x); }
 
-inline std::complex<double> exp(const std::complex<double> x) { return std::exp(x); }
-
 inline double pow(const double x, const double y) { return std::pow(x, y); }
 
-inline std::complex<double> pow(const std::complex<double> x, const double y) { return std::pow(x, y); }
-
 inline double log(const double &x) { return std::log(x); }
-
-inline std::complex<double> log(const std::complex<double> &x) { return std::log(x); }
 
 inline double log2(const double &x) { return std::log(x) / std::log(2.0); }
 
@@ -38,11 +32,6 @@ BOOST_PYTHON_MODULE(log_exp) {
 
   //! exp
   boost::python::def("exp", static_cast<double (*)(const double)>(&exp)
-	                  , "Exp of the element x"
-	                  , boost::python::args("x")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("exp", static_cast<std::complex<double> (*)(const std::complex<double>)>(&exp)
 	                  , "Exp of the element x"
 	                  , boost::python::args("x")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
@@ -73,11 +62,6 @@ BOOST_PYTHON_MODULE(log_exp) {
 	                  , boost::python::args("x", "y")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("pow", static_cast<std::complex<double> (*)(const std::complex<double>, const double)>(&pow)
-	                  , "Calculates x to the power of y (x^y)"
-	                  , boost::python::args("x", "y")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
-
   boost::python::def("pow", static_cast<itpp::vec (*)(const double, const itpp::vec &)>(&itpp::pow)
 	                  , "Calculates x to the power of y (x^y)"
 	                  , boost::python::args("x", "y")
@@ -100,11 +84,6 @@ BOOST_PYTHON_MODULE(log_exp) {
 
   //! log
   boost::python::def("log", static_cast<double (*)(const double &)>(&log)
-	                  , "Natural logarithm of the element"
-	                  , boost::python::args("x")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("log", static_cast<std::complex<double> (*)(const std::complex<double> &)>(&log)
 	                  , "Natural logarithm of the element"
 	                  , boost::python::args("x")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
