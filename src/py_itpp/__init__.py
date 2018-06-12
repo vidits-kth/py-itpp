@@ -16,6 +16,7 @@
 # -------------------------------------------------------------------------
 
 from .base import *
-from .comm import *
-from .signal import *
-from .stat import *
+
+from . import comm
+from . import signal
+from . import stat

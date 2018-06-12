@@ -15,12 +15,12 @@
 #
 # -------------------------------------------------------------------------
 
-from . import channel
-from . import convcode
-from . import error_counters
-from . import hammcode
-from . import interleave
-from . import llr
-from . import modulator
-from . import modulator_nd
-from . import turbo
+from .channel import *
+from .convcode import *
+from .error_counters import *
+from .hammcode import *
+from .interleave import *
+from .llr import *
+from .modulator import *
+from .modulator_nd import *
+from .turbo import *

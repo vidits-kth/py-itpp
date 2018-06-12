@@ -15,6 +15,6 @@
 #
 # -------------------------------------------------------------------------
 
-from . import elem_math
-from . import log_exp
-from . import min_max
+from .elem_math import *
+from .log_exp import *
+from .min_max import *

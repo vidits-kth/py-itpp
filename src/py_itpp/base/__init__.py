@@ -15,13 +15,13 @@
 #
 # -------------------------------------------------------------------------
 
-from .math import *
+from . import math
 
-from . import binary
-from . import itfile
-from . import factory
-from . import mat
-from . import matfunc
-from . import random
-from . import specmat
-from . import vec
+from .binary import *
+from .itfile import *
+from .factory import *
+from .mat import *
+from .matfunc import *
+from .random import *
+from .specmat import *
+from .vec import *
