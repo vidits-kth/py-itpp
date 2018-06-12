@@ -221,22 +221,16 @@ void generate_itpp_vec_wrapper(char const * name) {
                                                           boost::python::return_value_policy<boost::python::return_by_value>())
     .def(boost::python::self * Num_T())
     .def(boost::python::self *= Num_T())
-//    .def(Num_T() *= boost::python::self)
-//    .def(Num_T() * boost::python::self)
-//    .def(boost::python::self * boost::python::other<itpp::Vec<Num_T> >())
-//    .def(boost::python::self *= boost::python::other<itpp::Vec<Num_T> >())
+    .def(boost::python::self * boost::python::other<itpp::Vec<Num_T> >())
 
     .def(boost::python::self / Num_T())
     .def(boost::python::self /= Num_T())
-//    .def(Num_T() /= boost::python::self)
-//    .def(Num_T() / boost::python::self)
-//    .def(boost::python::self / boost::python::other<itpp::Vec<Num_T> >())
-//    .def(boost::python::self /= boost::python::other<itpp::Vec<Num_T> >())
+    .def(boost::python::self /= boost::python::other<itpp::Vec<Num_T> >())
 
-    .def("__idiv__", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, Num_T)>(&itpp::operator/),
-                                                     boost::python::return_value_policy<boost::python::return_by_value>())
-    .def("__idiv__", static_cast<itpp::Vec<Num_T> (*)(Num_T, const itpp::Vec<Num_T> &)>(&itpp::operator/),
-                                                     boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("__idiv__", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, Num_T)>(&itpp::operator/),
+//                                                     boost::python::return_value_policy<boost::python::return_by_value>())
+//    .def("__idiv__", static_cast<itpp::Vec<Num_T> (*)(Num_T, const itpp::Vec<Num_T> &)>(&itpp::operator/),
+//                                                     boost::python::return_value_policy<boost::python::return_by_value>())
 
     .def("right", &itpp::Vec<Num_T>::right)
     .def("left", &itpp::Vec<Num_T>::left)
