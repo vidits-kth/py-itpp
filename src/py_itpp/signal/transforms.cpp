@@ -22,9 +22,9 @@ BOOST_PYTHON_MODULE(transforms) {
   boost::python::docstring_options local_docstring_options(true, true, false);
 
   //! fft
-  boost::python::def("fft", &itpp::have_fourier_transforms
-	                  , "Run-time test if library is built with Fast Fourier Transforms enabled"
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+  boost::python::def("have_fourier_transforms", &itpp::have_fourier_transforms
+	                                      , "Run-time test if library is built with Fast Fourier Transforms enabled"
+                                              , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("fft", static_cast<void (*)(const itpp::cvec &, itpp::cvec &)>(&itpp::fft)
 	                  , "Fast Fourier Transform"
