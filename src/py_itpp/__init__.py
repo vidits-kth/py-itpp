@@ -18,4 +18,4 @@
 from .base import *
 from .comm import *
 from .signal import *
-from .misc_stat import *
+from .stat import *
