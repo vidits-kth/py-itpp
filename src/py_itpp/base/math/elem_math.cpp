@@ -23,7 +23,51 @@ inline double sqrt(const double &x) { return std::sqrt(x); }
 BOOST_PYTHON_MODULE(elem_math) {
   boost::python::docstring_options local_docstring_options(true, true, false);
 
-  // -------------------- abs function --------------------
+  //! real
+  boost::python::def("real", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::real)
+	                   , "Real part of complex values"
+	                   , boost::python::args("v")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("real", static_cast<itpp::mat (*)(const itpp::cmat &)>(&itpp::real)
+	                   , "Real part of complex values"
+	                   , boost::python::args("m")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  //! imag
+  boost::python::def("imag", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::imag)
+	                   , "Imaginary part of complex values"
+	                   , boost::python::args("v")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("imag", static_cast<itpp::mat (*)(const itpp::cmat &)>(&itpp::imag)
+	                   , "Imaginary part of complex values"
+	                   , boost::python::args("m")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  //! arg
+  boost::python::def("arg", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::arg)
+	                  , "Argument (angle)"
+	                  , boost::python::args("v")
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("arg", static_cast<itpp::mat (*)(const itpp::cmat &)>(&itpp::arg)
+	                  , "Argument (angle)"
+	                  , boost::python::args("m")
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  //! angle
+  boost::python::def("angle", static_cast<itpp::vec (*)(const itpp::cvec &)>(&itpp::angle)
+	                    , "Angle"
+	                    , boost::python::args("v")
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("angle", static_cast<itpp::mat (*)(const itpp::cmat &)>(&itpp::angle)
+	                    , "Angle"
+	                    , boost::python::args("m")
+                            , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  //! abs
 
   boost::python::def("abs", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::abs)
 	                  , "Absolute value"
@@ -55,7 +99,7 @@ BOOST_PYTHON_MODULE(elem_math) {
 	                  , boost::python::args("m")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  // -------------------- sqrt function --------------------
+  // sqrt
 
   boost::python::def("sqrt", static_cast<double (*)(const double &)>(&sqrt)
 	                   , "Square root of the elements"
@@ -72,7 +116,7 @@ BOOST_PYTHON_MODULE(elem_math) {
 	                   , boost::python::args("m")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  // -------------------- conj function --------------------
+  // conj
   boost::python::def("conj", static_cast<itpp::cvec (*)(const itpp::cvec &)>(&itpp::conj)
 	                   , "Conjugate of complex vector"
 	                   , boost::python::args("v")
