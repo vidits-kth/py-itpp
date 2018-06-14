@@ -22,7 +22,7 @@ BOOST_PYTHON_MODULE(modulator)
   boost::python::docstring_options local_docstring_options(true, true, false);
 
   // Soft demodulation methods
-  boost::python::enum_<itpp::Soft_Method>("soft_method")
+  boost::python::enum_<itpp::Soft_Method>("Soft_Method")
       .value("LOGMAP", itpp::LOGMAP)
       .value("APPROX", itpp::APPROX)
   ;
