@@ -84,12 +84,12 @@ BOOST_PYTHON_MODULE(log_exp) {
 
   //! pow2
   boost::python::def("pow2", static_cast<double (*)(double)>(&itpp::pow2)
-	                   , "Calculates two to the power of x (2^x) for integer"
+	                   , "Calculates two to the power of x (2^x)"
 	                   , boost::python::args("x")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("pow2", static_cast<int (*)(int)>(&itpp::pow2i)
-	                   , "Calculates two to the power of x (2^x)"
+  boost::python::def("pow2", static_cast<double (*)(int)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x) for integer"
 	                   , boost::python::args("x")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
@@ -109,7 +109,7 @@ BOOST_PYTHON_MODULE(log_exp) {
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
   boost::python::def("pow2", static_cast<itpp::mat (*)(const itpp::imat &)>(&itpp::pow2)
-	                   , "Calculates two to the power of x (2^x)"
+	                   , "Calculates two to the power of x (2^x) for integer"
 	                   , boost::python::args("m")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
