@@ -18,6 +18,7 @@
 from . import math
 
 from .binary import *
+from .circular_buffer import *
 from .itfile import *
 from .factory import *
 from .mat import *

@@ -82,6 +82,37 @@ BOOST_PYTHON_MODULE(log_exp) {
 	                  , boost::python::args("x", "y")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
+  //! pow2
+  boost::python::def("pow2", static_cast<double (*)(double)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x)"
+	                   , boost::python::args("x")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow2", static_cast<double (*)(int)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x) for integer"
+	                   , boost::python::args("x")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow2", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x)"
+	                   , boost::python::args("v")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow2", static_cast<itpp::vec (*)(const itpp::ivec &)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x) for integer"
+	                   , boost::python::args("v")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow2", static_cast<itpp::mat (*)(const itpp::mat &)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x)"
+	                   , boost::python::args("m")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("pow2", static_cast<itpp::mat (*)(const itpp::imat &)>(&itpp::pow2)
+	                   , "Calculates two to the power of x (2^x) for integer"
+	                   , boost::python::args("m")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
   //! log
   boost::python::def("log", static_cast<double (*)(const double &)>(&log)
 	                  , "Natural logarithm of the element"
