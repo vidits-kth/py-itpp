@@ -18,7 +18,13 @@
 #include <boost/python.hpp>
 #include <itpp/base/math/elem_math.h>
 
-inline double sqrt(const double &x) { return std::sqrt(x); }
+inline double sqrt(const int x) { return std::sqrt(double(x)); }
+
+inline double sqrt(const double x) { return std::sqrt(x); }
+
+inline int abs(const int x) { return std::abs(x); }
+
+inline double abs(const double x) { return std::abs(x); }
 
 BOOST_PYTHON_MODULE(elem_math) {
   boost::python::docstring_options local_docstring_options(true, true, false);
@@ -69,6 +75,16 @@ BOOST_PYTHON_MODULE(elem_math) {
 
   //! abs
 
+  boost::python::def("abs", static_cast<int (*)(const int)>(&abs)
+	                  , "Absolute value"
+	                  , boost::python::args("x")
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("abs", static_cast<double (*)(const double)>(&abs)
+	                  , "Absolute value"
+	                  , boost::python::args("x")
+                          , boost::python::return_value_policy<boost::python::return_by_value>());
+
   boost::python::def("abs", static_cast<itpp::vec (*)(const itpp::vec &)>(&itpp::abs)
 	                  , "Absolute value"
 	                  , boost::python::args("v")
@@ -101,7 +117,12 @@ BOOST_PYTHON_MODULE(elem_math) {
 
   // sqrt
 
-  boost::python::def("sqrt", static_cast<double (*)(const double &)>(&sqrt)
+  boost::python::def("sqrt", static_cast<double (*)(const int)>(&sqrt)
+	                   , "Square root of the elements"
+	                   , boost::python::args("x")
+                           , boost::python::return_value_policy<boost::python::return_by_value>());
+
+  boost::python::def("sqrt", static_cast<double (*)(const double)>(&sqrt)
 	                   , "Square root of the elements"
 	                   , boost::python::args("x")
                            , boost::python::return_value_policy<boost::python::return_by_value>());
