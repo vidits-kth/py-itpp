@@ -26,3 +26,9 @@ from .matfunc import *
 from .random import *
 from .specmat import *
 from .vec import *
+
+from .mat import elem_mult as elem_mult_mat
+from .vec import elem_mult as elem_mult_vec
+
+from .mat import elem_div as elem_div_mat
+from .vec import elem_div as elem_div_vec
