@@ -79,7 +79,7 @@ BOOST_PYTHON_MODULE(binary) {
     .def(boost::python::self_ns::str(boost::python::self))
     ;
 
-    boost::python::def("abs", static_cast<int (*)(const itpp::bin &)>(&std::abs)
-                            , boost::python::return_value_policy<boost::python::return_by_value>());
+//    boost::python::def("abs", static_cast<int (*)(const itpp::bin &)>(&std::abs)
+//                            , boost::python::return_value_policy<boost::python::return_by_value>());
 
 }

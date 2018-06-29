@@ -92,7 +92,7 @@ BOOST_PYTHON_MODULE(random)
 
   //! Integer uniform distribution
   boost::python::class_<itpp::I_Uniform_RNG>("I_Uniform_RNG", boost::python::init<>())
-    .def(boost::python::init<double>())
+    .def(boost::python::init<double, double>("Constructor. Set min and max", boost::python::args("self", "min", "max")))
 
     .def("setup", &itpp::I_Uniform_RNG::setup)
 
@@ -112,7 +112,7 @@ BOOST_PYTHON_MODULE(random)
 
   //! Uniform distribution
   boost::python::class_<itpp::Uniform_RNG>("Uniform_RNG", boost::python::init<>())
-    .def(boost::python::init<double>())
+    .def(boost::python::init<double, double>("Constructor. Set min and max", boost::python::args("self", "min", "max")))
 
     .def("setup", &itpp::Uniform_RNG::setup)
 
