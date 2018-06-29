@@ -1,3 +1,14 @@
+# NOTE!
+# If you have both Python 2.* and Python 3.* installed, Boost may detect
+# only Python 2.* and try to install against that. If so, you will need to
+# manually go into ~/tmp/boost*/ and update the following in project-config.jam
+#    using python : 3.5 : /usr ;
+#
+# NOTE!
+# You will need to update src/makefile to point to Python3 libraries
+#    -lboost_python3 -lboost_numpy3
+
+
 sudo apt-get update
 sudo apt-get -y install g++
 sudo apt-get -y install libblas-* liblapack-* libfftw-*
