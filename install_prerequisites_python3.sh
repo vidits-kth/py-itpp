@@ -38,6 +38,5 @@ cd boost_1_66_0/
 ./bootstrap.sh --with-python=python3.5
 sudo ./b2 install 
 
-
 cp ~/.bashrc ~/.bashrc.bak
 echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib >> ~/.bashrc
