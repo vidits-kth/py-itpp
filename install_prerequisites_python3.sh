@@ -2,9 +2,7 @@
 # Specify the correct Python version below for --with-python option
 #
 # NOTE!
-# You will need to update py_itpp/src/makefile to point to Python3 libraries
-#    -lboost_python3 -lboost_numpy3
-# and Python3 include path
+# You might need to update py_itpp/src/makefile to point to Python3
 #    INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python3.5
 
 sudo apt-get update

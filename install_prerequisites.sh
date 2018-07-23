@@ -1,5 +1,12 @@
 # NOTE!
 # Specify the correct Python version below for --with-python option
+#
+# NOTE!
+# You will need to update py_itpp/src/makefile to point to Python libraries
+#    -lboost_python3 -> -libboost_python
+#    -lboost_numpy3 -> libboost_numpy
+# and Python include path
+#    INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python2.7
 
 sudo apt-get update
 sudo apt-get -y install g++

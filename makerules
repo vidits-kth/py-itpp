@@ -37,7 +37,8 @@ LOCAL_SOURCE_SUBDIRS       := $(strip $(filter-out .svn,$(notdir $(patsubst %/,%
 #------------------------------------------------------------------------
 # Directories of target libraries
 #------------------------------------------------------------------------
-LOCAL_TARGET_DIR            := $(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION)
+#LOCAL_TARGET_DIR            := $(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION)
+LOCAL_TARGET_DIR            := $(LOCAL_HOME)/
 
 #------------------------------------------------------------------------
 # Names of local libraries:

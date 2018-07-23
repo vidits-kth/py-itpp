@@ -6,19 +6,19 @@ LOCAL_HOME        := $(shell pwd)/..
 
 include $(LOCAL_HOME)/makerules
 
-LIBS_SHARED := $(LIBS_SHARED) -litpp -lboost_python -lboost_numpy
-INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python2.7
+LIBS_SHARED := $(LIBS_SHARED) -litpp -lboost_python3 -lboost_numpy3
+INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python3.5
 
 # Get list of files in current directory
 CPPSOURCES := $(shell find . \( -type d -a -name .svn -a -prune \) -o \( -type f -a -regex '.*\.cpp$$' -print \) | sed 's%^\./%%')
 PYSOURCES := $(shell find . \( -type d -a -name .svn -a -prune \) -o \( -type f -a -regex '.*\.py$$' -print \) | sed 's%^\./%%')
 
+include $(CPPDEPS)
+
 # Include prerequisites
 CPPDEPS := $(patsubst %.cpp,$(LOCAL_TARGET_DIR)/%.d,$(CPPSOURCES))
 
-include $(CPPDEPS)
-
-install:  $(TARGET_LIB_PYTHON)
+install: depend $(TARGET_LIB_PYTHON)
 
 depend: $(CPPDEPS)
 
