@@ -14,7 +14,8 @@ cd py-itpp
 make install  
 pip3 install -e .  
 ```
-  
+Close the terminal and open a new one.  
+
 ### Python2:  
 ```
 cd py-itpp  
@@ -31,6 +32,7 @@ Install this package:
 make install  
 pip install -e .  
 ```
+Close the terminal and open a new one.  
 
 ## Usage
 ```python
