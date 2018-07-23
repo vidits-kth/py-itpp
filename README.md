@@ -18,7 +18,7 @@ pip3 install -e .
 ### Python2:  
 ```
 cd py-itpp  
-./install_prerequisites.sh  
+./install_prerequisites_python2.sh  
 ```
 Open src/makefile and replace  
 ```
