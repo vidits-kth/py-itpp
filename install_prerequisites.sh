@@ -1,3 +1,6 @@
+# NOTE!
+# Specify the correct Python version below for --with-python option
+
 sudo apt-get update
 sudo apt-get -y install g++
 sudo apt-get -y install libblas-* liblapack-* libfftw-*
@@ -5,10 +8,7 @@ sudo apt-get -y install make cmake
 sudo apt-get -y install python2.7* 
 sudo apt-get -y install python-dev python-pip python-tk python-numpy
 
-export LC_ALL="en_US.UTF-8"
-sudo pip install --upgrade pip
-sudo pip install matplotlib
-
+# Install ITPP
 mkdir ~/tmp
 cd ~/tmp
 wget https://netcologne.dl.sourceforge.net/project/itpp/itpp/4.3.1/itpp-4.3.1.tar.gz
@@ -20,14 +20,13 @@ cmake ..
 make
 sudo make install
 
-
+# Install Boost.Python
 cd ~/tmp
 wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
 tar -xf boost_1_66_0.tar.gz
 cd boost_1_66_0/
-./bootstrap.sh
-sudo ./b2 install --with-python
-
+./bootstrap.sh --with-python=python2.7
+sudo ./b2 install
 
 cp ~/.bashrc ~/.bashrc.old
 echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib >> ~/.bashrc
