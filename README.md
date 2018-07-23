@@ -7,7 +7,7 @@ py-itpp is a set of Python wrappers over the open source IT++ library (which is 
 ## Installation
 Clone this repo  
 
-# Python3:  
+### Python3:  
 ```python
 cd py-itpp  
 ./install_prerequisites_python3.sh  
@@ -15,7 +15,7 @@ make install
 pip3 install -e .  
 ```
   
-# Python2:  
+### Python2:  
 ```python
 cd py-itpp  
 ./install_prerequisites.sh  
