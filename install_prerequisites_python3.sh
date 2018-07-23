@@ -1,10 +1,5 @@
 # NOTE!
-# If you have both Python 2.* and Python 3.* installed, Boost may detect
-# only Python 2.* and try to install against that. If so, you will need to
-# manually go into ~/tmp/boost*/ and update the following in project-config.jam
-#    using python : 3.5 : /usr ;
-# Then run
-#    > sudo ./b2 install --with-python
+# Specify the correct Python version below for --with-python option
 #
 # NOTE!
 # You will need to update py_itpp/src/makefile to point to Python3 libraries
@@ -45,7 +40,7 @@ wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
 tar -xf boost_1_66_0.tar.gz
 cd boost_1_66_0/
 ./bootstrap.sh
-sudo ./b2 install --with-python
+sudo ./b2 install --with-python=python3.5
 
 
 cp ~/.bashrc ~/.bashrc.bak
