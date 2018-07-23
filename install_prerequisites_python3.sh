@@ -37,6 +37,5 @@ cd boost_1_66_0/
 sudo ./b2 install --with-python
 
 # Update LD_LIBRARY_PATH to point to dependencies
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 cp ~/.bashrc ~/.bashrc.bak
 echo export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib >> ~/.bashrc
