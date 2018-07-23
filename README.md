@@ -24,6 +24,7 @@ Open src/makefile and replace
 ```python
 libboost_python3 -> libboost_python  
 libboost_numpy3 -> libboost_numpy  
+INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python2.7
 ```
 Install this package:  
 ```python
