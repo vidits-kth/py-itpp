@@ -33,7 +33,7 @@ wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
 tar -xf boost_1_66_0.tar.gz
 cd boost_1_66_0/
 ./bootstrap.sh --with-python=python2.7
-sudo ./b2 install --with-python
+sudo ./b2 cxxflags=-fPIC install --with-python
 
 # Update LD_LIBRARY_PATH to point to dependencies
 cp ~/.bashrc ~/.bashrc.old
