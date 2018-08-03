@@ -28,7 +28,7 @@ BOOST_PYTHON_MODULE(vec)
   generate_itpp_vec_wrapper<std::complex<double> >("cvec");
   generate_itpp_vec_wrapper<int>("ivec");
   generate_itpp_vec_wrapper<itpp::bin>("bvec");
-  generate_itpp_vec_wrapper<short int>("svec");
+//  generate_itpp_vec_wrapper<short int>("svec");
 
   //! Conversion to Numpy NDarray
   Py_Initialize();

@@ -22,23 +22,23 @@ BOOST_PYTHON_MODULE(mat)
 {
   boost::python::docstring_options local_docstring_options(true, true, false);
 
-  // Default Matrix Type
+ // Default Matrix Type
   generate_itpp_mat_wrapper<double>("mat");
 
   // Default Complex Matrix Type
   generate_itpp_mat_wrapper<std::complex<double> >("cmat");
 
   // Default Float Matrix Type
-  generate_itpp_mat_wrapper<float>("fmat");
+//  generate_itpp_mat_wrapper<float>("fmat");
 
   // Default Complex Float Matrix Type
-  generate_itpp_mat_wrapper<std::complex<float> >("cfmat");
+//  generate_itpp_mat_wrapper<std::complex<float> >("cfmat");
 
   // Integer matrix
   generate_itpp_mat_wrapper<int>("imat");
 
   // short int matrix
-  generate_itpp_mat_wrapper<short int>("smat");
+//  generate_itpp_mat_wrapper<short int>("smat");
 
   // bin matrix
   generate_itpp_mat_wrapper<itpp::bin>("bmat");

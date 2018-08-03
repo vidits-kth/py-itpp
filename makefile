@@ -23,7 +23,7 @@ create_pylib: lib_dir
 clean: clean_local 
 
 clean_local:
-	-rm -rf lib/
+	-rm -rf py_itpp/
 #	-rm -f *% *~ *~~ *.orig *$$ core #*
 #	-rm -f *.log
 #	-rm -f */*% */*~ */*~~ */*.orig */*$$ */core */#*
