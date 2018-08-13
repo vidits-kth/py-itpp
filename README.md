@@ -36,8 +36,8 @@ Close the terminal and open a new one.
 
 ## Usage
 ```python
-import py_itpp as pyp  
-a = pyp.vec('0:10:100')  
+import itpp
+a = itpp.vec('0:10:100')  
 print(a)  
 ```
 ## More info, examples, etc.  
