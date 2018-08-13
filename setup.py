@@ -1,4 +1,4 @@
 from setuptools import setup
 
-setup(name='py_itpp',
-      version='0.0.1')
+setup(name='itpp',
+      version='0.0.2')

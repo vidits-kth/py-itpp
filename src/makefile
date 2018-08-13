@@ -3,6 +3,7 @@
 # --------------------------------------------------------------------------
 
 LOCAL_HOME        := $(shell pwd)/..
+LIB_NAME          := itpp
 
 include $(LOCAL_HOME)/makerules
 

@@ -5,6 +5,7 @@
 #Define the home direcory of the local version of this library
 
 LOCAL_HOME        := $(shell pwd)
+LIB_NAME          := itpp
 
 # Run the make command serially within this makefile
 .NOTPARALLEL:
@@ -23,18 +24,8 @@ create_pylib: lib_dir
 clean: clean_local 
 
 clean_local:
-	-rm -rf py_itpp/
-#	-rm -f *% *~ *~~ *.orig *$$ core #*
-#	-rm -f *.log
-#	-rm -f */*% */*~ */*~~ */*.orig */*$$ */core */#*
-#	-rm -f */*/*% */*/*~ */*/*~~ */*/*.orig */*/*$$ */*/core */*/#*
-#	-rm -f lib/*/*/*.o lib/*/*/*.d
-#	-find lib -mindepth 3 -type d -print0 | xargs -i -0 rm -rf {}
+	-rm -rf $(LOCAL_HOME)/$(LIB_NAME)/
 
-lib_dir: $(LOCAL_HOME)/ 
-
-#lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION)
-
-$(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION):
-	@mkdir -p $(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION)
+lib_dir:
+	@mkdir -p $(LOCAL_HOME)/$(LIB_NAME)/
 

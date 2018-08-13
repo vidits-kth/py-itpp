@@ -37,13 +37,7 @@ LOCAL_SOURCE_SUBDIRS       := $(strip $(filter-out .svn,$(notdir $(patsubst %/,%
 #------------------------------------------------------------------------
 # Directories of target libraries
 #------------------------------------------------------------------------
-#LOCAL_TARGET_DIR            := $(LOCAL_HOME)/lib/$(TARGET_MACHINE)/gcc$(COMPILER_VERSION)
-LOCAL_TARGET_DIR            := $(LOCAL_HOME)/
-
-#------------------------------------------------------------------------
-# Names of local libraries:
-#------------------------------------------------------------------------
-LOCAL_TARGET_SHARED         := lib$(LIB_BASE_NAME).so
+LOCAL_TARGET_DIR            := $(LOCAL_HOME)/$(LIB_NAME)
 
 #------------------------------------------------------------------------
 # Lib-paths for local libraries:
@@ -54,7 +48,7 @@ LOCAL_LIBPATH               := -L$(LOCAL_TARGET_DIR)
 # Lib-paths for local libraries:
 #------------------------------------------------------------------------
 LOCAL_LIB_SHARED            := -l$(LIB_BASE_NAME)
-LOCAL_LIB_PYTHON            := py_$(LIB_BASE_NAME)
+LOCAL_LIB_PYTHON            := $(LIB_BASE_NAME)
 
 #------------------------------------------------------------------------
 # Define target libraries:
