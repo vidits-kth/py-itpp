@@ -19,6 +19,7 @@ sudo apt-get -y install python-dev python-pip python-tk python-numpy
 sudo apt-get -y install libitpp-dev
 
 # Install Boost.Python
+mkdir ~/tmp
 cd ~/tmp
 wget https://dl.bintray.com/boostorg/release/1.66.0/source/boost_1_66_0.tar.gz
 tar -xf boost_1_66_0.tar.gz
