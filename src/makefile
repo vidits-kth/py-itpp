@@ -8,7 +8,7 @@ LIB_NAME          := itpp
 include $(LOCAL_HOME)/makerules
 
 LIBS_SHARED := $(LIBS_SHARED) -litpp -lboost_python3 -lboost_numpy3
-INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python3.5
+INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python3.5 -I/usr/include/python3.6
 
 # Get list of files in current directory
 CPPSOURCES := $(shell find . \( -type d -a -name .svn -a -prune \) -o \( -type f -a -regex '.*\.cpp$$' -print \) | sed 's%^\./%%')
