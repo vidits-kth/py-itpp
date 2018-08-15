@@ -22,9 +22,9 @@ inline double sqrt(const int x) { return std::sqrt(double(x)); }
 
 inline double sqrt(const double x) { return std::sqrt(x); }
 
-inline int abs(const int x) { return std::abs(x); }
+inline int abs_(const int x) { return std::abs(x); }
 
-inline double abs(const double x) { return std::abs(x); }
+inline double abs_(const double x) { return std::abs(x); }
 
 BOOST_PYTHON_MODULE(elem_math) {
   boost::python::docstring_options local_docstring_options(true, true, false);
@@ -75,12 +75,12 @@ BOOST_PYTHON_MODULE(elem_math) {
 
   //! abs
 
-  boost::python::def("abs", static_cast<int (*)(const int)>(&abs)
+  boost::python::def("abs", static_cast<int (*)(const int)>(&abs_)
 	                  , "Absolute value"
 	                  , boost::python::args("x")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
 
-  boost::python::def("abs", static_cast<double (*)(const double)>(&abs)
+  boost::python::def("abs", static_cast<double (*)(const double)>(&abs_)
 	                  , "Absolute value"
 	                  , boost::python::args("x")
                           , boost::python::return_value_policy<boost::python::return_by_value>());
