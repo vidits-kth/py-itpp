@@ -16,16 +16,7 @@ sudo apt-get -y install python2.7*
 sudo apt-get -y install python-dev python-pip python-tk python-numpy
 
 # Install ITPP
-mkdir ~/tmp
-cd ~/tmp
-wget https://netcologne.dl.sourceforge.net/project/itpp/itpp/4.3.1/itpp-4.3.1.tar.gz
-tar -xf itpp-4.3.1.tar.gz
-cd itpp-4.3.1/
-mkdir build
-cd build
-cmake ..
-make
-sudo make install
+sudo apt-get -y install libitpp-dev
 
 # Install Boost.Python
 cd ~/tmp
