@@ -53,5 +53,6 @@ import itpp
 a = itpp.vec('0:10:100')  
 print(a)  
 ```
-## More info, examples, etc.  
+## More info, examples, etc.
+Examples: https://github.com/vidits-kth/py-itpp/tree/master/examples
 Wiki: https://github.com/vidits-kth/py-itpp/wiki
