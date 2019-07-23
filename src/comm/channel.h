@@ -42,7 +42,7 @@ void generate_pybind_wrapper_for_itpp_channel_enum( py::module &m ) {
     .value("COST207_HT12alt", itpp::COST207_HT12alt)
     .value("COST259_TUx", itpp::COST259_TUx)
     .value("COST259_RAx", itpp::COST259_RAx)
-    .value("COST259_RAx", itpp::COST259_RAx)
+    .value("COST259_HTx", itpp::COST259_HTx)
   ;
 
   //! Fading generator type: Independent (default), Static or Correlated.

@@ -17,25 +17,17 @@
 
 #include "matfunc.h"
 
-BOOST_PYTHON_MODULE(matfunc)
+PYBIND11_MODULE( matfunc, m)
 {
-  boost::python::docstring_options local_docstring_options(true, true, false);
 
-  generate_matfunc_wrapper<double>();
-  generate_matfunc_wrapper<std::complex<double> >();
-  generate_matfunc_wrapper<int>();
-  generate_matfunc_wrapper<itpp::bin>();
-  generate_matfunc_wrapper<short>();
+  generate_pybind_wrapper_for_matfunc_module<double>(m);
+  generate_pybind_wrapper_for_matfunc_module<std::complex<double> >(m);
+  generate_pybind_wrapper_for_matfunc_module<int>(m);
+  generate_pybind_wrapper_for_matfunc_module<itpp::bin>(m);
+  generate_pybind_wrapper_for_matfunc_module<short>(m);
 
   //! sqrtm
-  boost::python::def("sqrtm", static_cast<itpp::cmat (*)(const itpp::cmat &)>(&itpp::sqrtm)
-                            , "Square root of the complex square matrix m"
-                            , boost::python::args("m")
-                            , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("sqrtm", static_cast<itpp::cmat (*)(const itpp::mat &)>(&itpp::sqrtm)
-                            , "Square root of the real square matrix m"
-                            , boost::python::args("m")
-                            , boost::python::return_value_policy<boost::python::return_by_value>());
+  m.def("sqrtm", static_cast<itpp::cmat (*)(const itpp::cmat &)>(&itpp::sqrtm));
+  m.def("sqrtm", static_cast<itpp::cmat (*)(const itpp::mat &)>(&itpp::sqrtm));
 
 }

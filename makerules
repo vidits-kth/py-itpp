@@ -17,13 +17,13 @@ else
 #FLAGS_COMMON_MATH := -fno-math-errno -fno-signed-zeros -fno-trapping-math -fassociative-math -fno-rounding-math -fno-signaling-nans -fcx-limited-range 
 endif
 
-FLAGS_PYTHON       := $(FLAGS_COMMON) $(ARCH_FLAGS) -shared -O1 -fPIC $(FLAGS_COMMON_MATH) $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
+FLAGS_PYTHON       := $(FLAGS_COMMON) $(ARCH_FLAGS) -shared -O3 -std=c++11 -Wall -fPIC $(FLAGS_COMMON_MATH) $(ADDITIONAL_COMPILER_FLAGS) $(USER_FLAGS)
 
 #------------------------------------------------------------------------
 # Define include path for the local library
 #------------------------------------------------------------------------
 
-LOCAL_INCLUDE_PATH          := -I$(LOCAL_HOME)/include -I.
+#LOCAL_INCLUDE_PATH          := -I$(LOCAL_HOME)/include -I.
 
 #------------------------------------------------------------------------
 # Define directories for the local src
@@ -37,7 +37,7 @@ LOCAL_SOURCE_SUBDIRS       := $(strip $(filter-out .svn,$(notdir $(patsubst %/,%
 #------------------------------------------------------------------------
 # Directories of target libraries
 #------------------------------------------------------------------------
-LOCAL_TARGET_DIR            := $(LOCAL_HOME)/$(LIB_NAME)
+LOCAL_TARGET_DIR            := $(LOCAL_HOME)/lib/$(LIB_NAME)
 
 #------------------------------------------------------------------------
 # Lib-paths for local libraries:

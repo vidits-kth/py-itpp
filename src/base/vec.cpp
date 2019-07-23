@@ -15,23 +15,14 @@
 //!
 //! -------------------------------------------------------------------------
 
-// Dummy change to force rebuild during make install
-
-#include <boost/python/numpy.hpp>
 #include "vec.h"
 
-BOOST_PYTHON_MODULE(vec)
+PYBIND11_MODULE(vec, m)
 {
-  boost::python::docstring_options local_docstring_options(true, true, false);
-
-  generate_itpp_vec_wrapper<double>("vec");
-  generate_itpp_vec_wrapper<std::complex<double> >("cvec");
-  generate_itpp_vec_wrapper<int>("ivec");
-  generate_itpp_vec_wrapper<itpp::bin>("bvec");
-//  generate_itpp_vec_wrapper<short int>("svec");
-
-  //! Conversion to Numpy NDarray
-  Py_Initialize();
-  boost::python::numpy::initialize();
+  generate_itpp_vec_wrapper<double>(m, "vec");
+  generate_itpp_vec_wrapper<std::complex<double> >(m, "cvec");
+  generate_itpp_vec_wrapper<int>(m, "ivec");
+  generate_itpp_vec_wrapper<itpp::bin>(m, "bvec");
+  generate_itpp_vec_wrapper<short int>(m, "svec");
 
 }

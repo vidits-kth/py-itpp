@@ -7,8 +7,8 @@ LIB_NAME          := itpp
 
 include $(LOCAL_HOME)/makerules
 
-LIBS_SHARED := $(LIBS_SHARED) -litpp -lboost_python3 -lboost_numpy3
-INCLUDE_PATH := $(INCLUDE_PATH) -I/usr/include/python3.5 -I/usr/include/python3.6
+LIBS_SHARED := $(LIBS_SHARED) -litpp #-lboost_python3 -lboost_numpy3
+INCLUDE_PATH := $(INCLUDE_PATH) -I/home/ubuntu/workspace/pybind11/include -I/usr/include/python3.6/
 
 # Get list of files in current directory
 CPPSOURCES := $(shell find . \( -type d -a -name .svn -a -prune \) -o \( -type f -a -regex '.*\.cpp$$' -print \) | sed 's%^\./%%')
@@ -28,7 +28,7 @@ $(TARGET_LIB_PYTHON): $(patsubst %.cpp,$(LOCAL_TARGET_DIR)/%.so,$(CPPSOURCES))  
 
 $(LOCAL_TARGET_DIR)/%.so: %.cpp
 	@echo Compiling $< to Python module
-	@${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) $(LIB_PATH) $< -o $@ $(LIBS_SHARED)
+	@${CXX} $(FLAGS_PYTHON) $(INCLUDE_PATH) `python3 -m pybind11 --includes` $< -o $@ $(LIBS_SHARED)
 
 $(LOCAL_TARGET_DIR)/%.py: %.py
 	@echo Copying $< to Python package

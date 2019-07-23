@@ -24,8 +24,8 @@ create_pylib: lib_dir
 clean: clean_local 
 
 clean_local:
-	-rm -rf $(LOCAL_HOME)/$(LIB_NAME)/
+	-rm -rf $(LOCAL_HOME)/lib/
 
 lib_dir:
-	@mkdir -p $(LOCAL_HOME)/$(LIB_NAME)/
+	@mkdir -p $(LOCAL_HOME)/lib/$(LIB_NAME)/
 

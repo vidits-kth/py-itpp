@@ -15,28 +15,9 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <boost/python.hpp>
-#include <itpp/comm/hammcode.h>
+#include "hammcode.h"
 
-BOOST_PYTHON_MODULE(hammcode)
+PYBIND11_MODULE(hammcode, m)
 {
-  boost::python::docstring_options local_docstring_options(true, true, false);
-
-  boost::python::class_<itpp::Hamming_Code>("hamming_code", boost::python::init<short>())
-
-    .def("encode", static_cast<void (itpp::Hamming_Code::*)(const itpp::bvec &, itpp::bvec &)>(&itpp::Hamming_Code::encode))
-    .def("encode", static_cast<itpp::bvec (itpp::Hamming_Code::*)(const itpp::bvec &)>(&itpp::Hamming_Code::encode)
-                 , boost::python::return_value_policy<boost::python::return_by_value>())
-
-
-    .def("decode", static_cast<void (itpp::Hamming_Code::*)(const itpp::bvec &, itpp::bvec &)>(&itpp::Hamming_Code::decode))
-    .def("decode", static_cast<itpp::bvec (itpp::Hamming_Code::*)(const itpp::bvec &)>(&itpp::Hamming_Code::decode)
-                 , boost::python::return_value_policy<boost::python::return_by_value>())
-
-    .def("get_rate", &itpp::Hamming_Code::get_rate)
-    .def("get_n", &itpp::Hamming_Code::get_n)
-    .def("get_k", &itpp::Hamming_Code::get_k)
-    .def("get_H", &itpp::Hamming_Code::get_H)
-    .def("get_G", &itpp::Hamming_Code::get_G)
-  ;
+  generate_pybind_wrapper_for_itpp_hamming_code_class( m, "Hamming_Code" );
 }

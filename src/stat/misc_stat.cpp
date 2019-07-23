@@ -15,77 +15,10 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <boost/python.hpp>
-#include <itpp/stat/misc_stat.h>
+#include "misc_stat.h"
 
-BOOST_PYTHON_MODULE(misc_stat) {
-  boost::python::docstring_options local_docstring_options(true, true, false);
+PYBIND11_MODULE( misc_stat, m ) {
 
-  //! mean
-  boost::python::def("mean", static_cast<double (*)(const itpp::vec &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("v")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<std::complex<double> (*)(const itpp::cvec &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("v")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<double (*)(const itpp::svec &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("v")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<double (*)(const itpp::ivec &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("v")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<double (*)(const itpp::mat &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("m")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<std::complex<double> (*)(const itpp::cmat &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("m")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<double (*)(const itpp::smat &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("m")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("mean", static_cast<double (*)(const itpp::imat &)>(&itpp::mean)
-	                   , "The mean value"
-	                   , boost::python::args("m")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-  //! norm
-  boost::python::def("norm", static_cast<double (*)(const itpp::cvec &, int)>(&itpp::norm)
-	                   , "Calculate the p-norm: norm(v,p)=sum(abs(v).^2)^(1/p)"
-	                   , boost::python::args("v", "p")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("norm", static_cast<double (*)(const itpp::cvec &, const std::string &)>(&itpp::norm)
-	                   , "Calculate the Frobenius norm for s = \"fro\" (equal to 2-norm)"
-	                   , boost::python::args("v", "s")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("norm", static_cast<double (*)(const itpp::mat &, int)>(&itpp::norm)
-	                   , "Calculate the p-norm of a real matrix"
-	                   , boost::python::args("m", "p")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("norm", static_cast<double (*)(const itpp::cmat &, int)>(&itpp::norm)
-	                   , "Calculate the p-norm of a complex matrix"
-	                   , boost::python::args("m", "p")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
-
-  boost::python::def("norm", static_cast<double (*)(const itpp::mat &, const std::string &)>(&itpp::norm)
-	                   , "Calculate the Frobenius norm of a real matrix for s = \"fro\" (equal to 2-norm)"
-	                   , boost::python::args("m", "s")
-                           , boost::python::return_value_policy<boost::python::return_by_value>());
+  generate_pybind_wrapper_for_itpp_misc_stat_module( m );
 
 }
-

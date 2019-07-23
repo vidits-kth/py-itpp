@@ -18,9 +18,6 @@
 from . import math
 
 from .binary import *
-from .circular_buffer import *
-from .itfile import *
-from .factory import *
 from .mat import *
 from .matfunc import *
 from .random import *

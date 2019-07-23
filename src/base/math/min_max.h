@@ -15,70 +15,62 @@
 //!
 //! -------------------------------------------------------------------------
 
-#include <boost/python.hpp>
+#include <pybind11/pybind11.h>
+#include <pybind11/complex.h>
+
 #include <itpp/base/math/min_max.h>
 
+namespace py = pybind11;
+
 template<class T>
-void generate_min_max_wrapper() {
+void generate_pybind_wrapper_for_min_max_module( py::module &m ) {
 
-  boost::python::def("max", static_cast<T (*)(const itpp::Vec<T> &)>(&itpp::max)
+  m.def("max", static_cast<T (*)(const itpp::Vec<T> &)>(&itpp::max)
 		          , "Maximum value of vector"
-			  , boost::python::args("v")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("v"));
 
-  boost::python::def("max", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::max)
+  m.def("max", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::max)
 		          , "Maximum value of vector, also returns the index position of max value"
-			  , boost::python::args("v", "index")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("v"), py::arg("index"));
 
-  boost::python::def("max", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::max)
+  m.def("max", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::max)
 		          , "Maximum values over each row/column in the matrix m"
-			  , boost::python::args("m", "dim")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("m"), py::arg("dim"));
 
-  boost::python::def("max", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::max)
+  m.def("max", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::max)
 		          , "Maximum values over each row/column in the matrix m. Also returns a vector of indices with positions of maximum value within a column/row."
-			  , boost::python::args("m", "index", "dim")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("m"), py::arg("index"), py::arg("dim"));
 
-  boost::python::def("min", static_cast<T (*)(const itpp::Vec<T> &)>(&itpp::min)
+  m.def("min", static_cast<T (*)(const itpp::Vec<T> &)>(&itpp::min)
 		          , "Minimum value of vector"
-			  , boost::python::args("v")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("v"));
 
-  boost::python::def("min", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::min)
+  m.def("min", static_cast<T (*)(const itpp::Vec<T> &, int &)>(&itpp::min)
 		          , "Minimum value of vector, also returns the index position of min value"
-			  , boost::python::args("v", "index")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("v"), py::arg("index"));
 
-  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::min)
+  m.def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, int)>(&itpp::min)
 		          , "Minimum values over each row/column in the matrix m"
-			  , boost::python::args("m", "dim")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("m"), py::arg("dim"));
 
-  boost::python::def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::min)
+  m.def("min", static_cast<itpp::Vec<T> (*)(const itpp::Mat<T> &, itpp::Vec<int> &, int)>(&itpp::min)
 		          , "Minimum values over each row/column in the matrix m. Also returns a vector of indices with positions of minimum value within a column/row."
-			  , boost::python::args("m", "index", "dim")
-                          , boost::python::return_value_policy<boost::python::return_by_value>());
+			  , py::arg("m"), py::arg("index"), py::arg("dim"));
 
-  boost::python::def("max_index", static_cast<int (*)(const itpp::Vec<T> &)>(&itpp::max_index)
+  m.def("max_index", static_cast<int (*)(const itpp::Vec<T> &)>(&itpp::max_index)
 		                , "Return the postion of the maximum element in the vector"
-			        , boost::python::args("in")
-                                , boost::python::return_value_policy<boost::python::return_by_value>());
+			        , py::arg("in"));
 
-  boost::python::def("max_index", static_cast<void (*)(const itpp::Mat<T> &, int &, int &)>(&itpp::max_index)
+  m.def("max_index", static_cast<void (*)(const itpp::Mat<T> &, int &, int &)>(&itpp::max_index)
 		                , "Return the postion of the maximum element in the matrix"
-			        , boost::python::args("m", "row", "col")
-                                , boost::python::return_value_policy<boost::python::return_by_value>());
+			        , py::arg("m"), py::arg("row"), py::arg("col"));
 
-  boost::python::def("min_index", static_cast<int (*)(const itpp::Vec<T> &)>(&itpp::min_index)
+  m.def("min_index", static_cast<int (*)(const itpp::Vec<T> &)>(&itpp::min_index)
 		                , "Return the position of the minimum element in the vector"
-			        , boost::python::args("in")
-                                , boost::python::return_value_policy<boost::python::return_by_value>());
+			        , py::arg("in"));
 
-  boost::python::def("min_index", static_cast<void (*)(const itpp::Mat<T> &, int &, int &)>(&itpp::min_index)
+  m.def("min_index", static_cast<void (*)(const itpp::Mat<T> &, int &, int &)>(&itpp::min_index)
 		                , "Return the position of the minimum element in the matrix"
-			        , boost::python::args("m", "row", "col")
-                                , boost::python::return_value_policy<boost::python::return_by_value>());
+			        , py::arg("m"), py::arg("row"), py::arg("col"));
 
 }

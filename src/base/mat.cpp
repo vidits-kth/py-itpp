@@ -18,33 +18,27 @@
 #include "mat.h"
 
 //! Create wrappers within the mat module
-BOOST_PYTHON_MODULE(mat)
+PYBIND11_MODULE(mat, m)
 {
-  boost::python::docstring_options local_docstring_options(true, true, false);
-
  // Default Matrix Type
-  generate_itpp_mat_wrapper<double>("mat");
+  generate_itpp_mat_wrapper<double>(m, "mat");
 
   // Default Complex Matrix Type
-  generate_itpp_mat_wrapper<std::complex<double> >("cmat");
+  generate_itpp_mat_wrapper<std::complex<double> >(m, "cmat");
 
   // Default Float Matrix Type
-//  generate_itpp_mat_wrapper<float>("fmat");
+  generate_itpp_mat_wrapper<float>(m, "fmat");
 
   // Default Complex Float Matrix Type
-//  generate_itpp_mat_wrapper<std::complex<float> >("cfmat");
+  generate_itpp_mat_wrapper<std::complex<float> >(m, "cfmat");
 
   // Integer matrix
-  generate_itpp_mat_wrapper<int>("imat");
+  generate_itpp_mat_wrapper<int>(m, "imat");
 
   // short int matrix
-//  generate_itpp_mat_wrapper<short int>("smat");
+  generate_itpp_mat_wrapper<short int>(m, "smat");
 
   // bin matrix
-  generate_itpp_mat_wrapper<itpp::bin>("bmat");
-
-  //! Extra functions for conversion to Numpy NDarrays
-  Py_Initialize();
-  boost::python::numpy::initialize();
+  generate_itpp_mat_wrapper<itpp::bin>(m, "bmat");
 
 }

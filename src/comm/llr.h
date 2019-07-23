@@ -28,7 +28,7 @@ namespace py = pybind11;
 
 //  boost::python::scope().attr("QLLRmat") =  boost::python::object(boost::python::ptr(&itpp::QLLRmat));
 
-void generate_pybind_wrapper_for_itpp_llp_calc_unit_class( py::module &m, const char * name ) {
+void generate_pybind_wrapper_for_itpp_llp_calc_unit_class( py::module &m ) {
 
   py::class_<itpp::LLR_calc_unit>( m, "LLR_calc_unit",
 					     "Log-likelihood algebra calculation unit. This class contains functions for algebra with log-likelihood ratios"

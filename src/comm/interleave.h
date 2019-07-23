@@ -15,138 +15,126 @@
 //!
 //! -------------------------------------------------------------------------
 
+#include <pybind11/pybind11.h>
+#include <pybind11/operators.h>
+
 #include <itpp/comm/interleave.h>
-#include <boost/python.hpp>
+
+namespace py = pybind11;
 
 template<class T>
-void generate_block_interleaver(char const * name) {
+void generate_pybind_wrapper_for_itpp_block_interleaver_class( py::module &m, char const * name ) {
 
   // Block Interleaver Class
-  boost::python::class_<itpp::Block_Interleaver<T> >(name, "Block Interleaver Class", boost::python::init<>("Block_Interleaver constructor", boost::python::args("self")))
-
-    .def(boost::python::init<int, int>("Block_Interleaver constructor", boost::python::args("self", "in_rows", "in_cols")))
+  py::class_<itpp::Block_Interleaver<T> >( m, name, "Block Interleaver Class" )
+    .def( py::init<>(), "Block_Interleaver constructor")
+    .def( py::init<int, int>(), "Block_Interleaver constructor"
+		              , py::arg( "in_rows"), py::arg("in_cols"))
 
     .def("interleave", static_cast<itpp::Vec<T> (itpp::Block_Interleaver<T>::*)(const itpp::Vec<T>&)>(&itpp::Block_Interleaver<T>::interleave)
                      , "Function for block interleaving. May add some zeros."
-                     , boost::python::args("self", "input")
-                     , boost::python::return_value_policy<boost::python::return_by_value>())
+                     , py::arg( "input"))
 
     .def("interleave", static_cast<void (itpp::Block_Interleaver<T>::*)(const itpp::Vec<T>&, itpp::Vec<T>&)>(&itpp::Block_Interleaver<T>::interleave)
                      , "Function for block interleaving. May add some zeros."
-                     , boost::python::args("self", "input", "output"))
+                     , py::arg( "input"), py::arg("output"))
 
     .def("deinterleave", static_cast<itpp::Vec<T> (itpp::Block_Interleaver<T>::*)(const itpp::Vec<T>&, short)>(&itpp::Block_Interleaver<T>::deinterleave)
                        , "Function for block deinterleaving. Removes additional zeros if keepzeros = 0."
-                       , boost::python::args("self", "input", "keepzeroes")
-                       , boost::python::return_value_policy<boost::python::return_by_value>())
+                       , py::arg( "input"), py::arg("keepzeroes"))
 
     .def("deinterleave", static_cast<void (itpp::Block_Interleaver<T>::*)(const itpp::Vec<T>&, itpp::Vec<T>&, short)>(&itpp::Block_Interleaver<T>::deinterleave)
                        , "Function for block deinterleaving. Removes additional zeros if keepzeros = 0."
-                       , boost::python::args("self", "input", "output", "keepzeroes"))
+                       , py::arg( "input"), py::arg("output"), py::arg("keepzeroes"))
 
     .def("set_rows", &itpp::Block_Interleaver<T>::set_rows
                    , "Set the number of rows for block interleaving"
-                   , boost::python::args("self", "in_rows"))
+                   , py::arg( "in_rows"))
     .def("set_cols", &itpp::Block_Interleaver<T>::set_cols
                    , "Set the number of columns for block interleaving"
-                   , boost::python::args("self", "in_cols"))
+                   , py::arg( "in_cols"))
 
     .def("get_rows", &itpp::Block_Interleaver<T>::get_rows
-                   , "Get the number of rows for block interleaving"
-                   , boost::python::args("self")
-                   , boost::python::return_value_policy<boost::python::return_by_value>())
+                   , "Get the number of rows for block interleaving")
 
     .def("get_cols", &itpp::Block_Interleaver<T>::get_cols
-                   , "Get the number of cols for block interleaving"
-                   , boost::python::args("self")
-                   , boost::python::return_value_policy<boost::python::return_by_value>())
+                   , "Get the number of cols for block interleaving")
   ;
 }
 
 template<class T>
-void generate_cross_interleaver(char const * name) {
+void generate_pybind_wrapper_for_itpp_cross_interleaver_class( py::module &m, char const * name ) {
 
   // Cross Interleaver Class
-  boost::python::class_<itpp::Cross_Interleaver<T> >(name,
-						     "Cross Interleaver Class. See S. B. Wicker, \"Error control systems for digital communications and storage,\""
-						     " Prentice Hall 1995, p. 427 for details.",
-						     boost::python::init<>("Cross_Interleaver constructor", boost::python::args("self")))
-
-    .def(boost::python::init<int>("Cross_Interleaver constructor", boost::python::args("self", "in_order")))
+  py::class_<itpp::Cross_Interleaver<T> >( m, name, "Cross Interleaver Class. See S. B. Wicker, \"Error control systems for digital communications and storage,\" Prentice Hall 1995, p. 427 for details.")
+	  
+    .def( py::init<>(), "Cross_Interleaver constructor")
+    .def(py::init<int>(), "Cross_Interleaver constructor"
+		        , py::arg( "in_order"))
 
     .def("interleave", static_cast<itpp::Vec<T> (itpp::Cross_Interleaver<T>::*)(const itpp::Vec<T> &)>(&itpp::Cross_Interleaver<T>::interleave)
                      , "Function for cross interleaving. Adds some zeros."
-                     , boost::python::args("self", "input")
-                     , boost::python::return_value_policy<boost::python::return_by_value>())
+                     , py::arg( "input"))
     .def("interleave", static_cast<void (itpp::Cross_Interleaver<T>::*)(const itpp::Vec<T> &, itpp::Vec<T> &)>(&itpp::Cross_Interleaver<T>::interleave)
                      , "Function for cross interleaving. Adds some zeros."
-                     , boost::python::args("self", "input", "output"))
+                     , py::arg( "input"), py::arg("output"))
 
     .def("deinterleave", static_cast<itpp::Vec<T> (itpp::Cross_Interleaver<T>::*)(const itpp::Vec<T> &, short)>(&itpp::Cross_Interleaver<T>::deinterleave)
-                       , boost::python::return_value_policy<boost::python::return_by_value>()
 	               , "Function for cross deinterleaving. Removes aditional zeros if keepzeros = 0."
-	               , boost::python::args("self", "input", "keepzeroes"))
+	               , py::arg( "input"), py::arg("keepzeroes"))
     .def("deinterleave", static_cast<void (itpp::Cross_Interleaver<T>::*)(const itpp::Vec<T> &, itpp::Vec<T> &, short)>(&itpp::Cross_Interleaver<T>::deinterleave)
                        , "Function for cross deinterleaving. Removes aditional zeros if keepzeros = 0."
-                       , boost::python::args("self", "input", "output", "keepzeroes"))
+                       , py::arg( "input"), py::arg("output"), py::arg("keepzeroes"))
 
     .def("set_order", &itpp::Cross_Interleaver<T>::set_order
                     , "Set the order of the Cross Interleaver"
-                    , boost::python::args("self", "in_order"))
+                    , py::arg( "in_order"))
     .def("get_order", &itpp::Cross_Interleaver<T>::get_order
-                    , "Get the order of the Cross Interleaver"
-                    , boost::python::args("self")
-                    , boost::python::return_value_policy<boost::python::return_by_value>())
+                    , "Get the order of the Cross Interleaver")
+                    
   ;
 }
 
 template<class T>
-void generate_sequence_interleaver(char const * name) {
+void generate_pybind_wrapper_for_itpp_sequence_interleaver_class( py::module &m, char const * name ) {
 
   // Sequence Interleaver Class
-  boost::python::class_<itpp::Sequence_Interleaver<T> >(name, "Sequence Interleaver Class", boost::python::init<>("Sequence_Interleaver constructor.", boost::python::args("self")))
-
-    .def(boost::python::init<int>("Sequence_Interleaver constructor. Chooses a random sequence of length \a in_interleaver_depth for interleaving.",
-				  boost::python::args("self", "in_interleaver_depth")))
-    .def(boost::python::init<itpp::ivec>("Sequence_Interleaver constructor. Uses the in_interleaver_sequence for interleaving.",
-					 boost::python::args("self", "in_interleaver_sequence")))
+  py::class_<itpp::Sequence_Interleaver<T> >( m, name, "Sequence Interleaver Class")
+    .def(py::init<>(), "Sequence_Interleaver constructor.")
+    .def(py::init<int>(), "Sequence_Interleaver constructor. Chooses a random sequence of length \a in_interleaver_depth for interleaving."
+		        , py::arg( "in_interleaver_depth"))
+    .def(py::init<itpp::ivec>(), "Sequence_Interleaver constructor. Uses the in_interleaver_sequence for interleaving."
+			       , py::arg( "in_interleaver_sequence"))
 
     .def("interleave", static_cast<itpp::Vec<T> (itpp::Sequence_Interleaver<T>::*)(const itpp::Vec<T> &)>(&itpp::Sequence_Interleaver<T>::interleave)
                      , "Function for sequence interleaving. May add some zeros."
-                     , boost::python::args("self", "input")
-                     , boost::python::return_value_policy<boost::python::return_by_value>())
+                     , py::arg( "input"))
     .def("interleave", static_cast<void (itpp::Sequence_Interleaver<T>::*)(const itpp::Vec<T> &, itpp::Vec<T> &)>(&itpp::Sequence_Interleaver<T>::interleave)
                      , "Function for sequence interleaving. May add some zeros."
-                     , boost::python::args("self", "input", "output"))
+                     , py::arg( "input"), py::arg("output"))
 
     .def("deinterleave", static_cast<itpp::Vec<T> (itpp::Sequence_Interleaver<T>::*)(const itpp::Vec<T> &, short)>(&itpp::Sequence_Interleaver<T>::deinterleave)
                        , "Function for sequence deinterleaving. Removes additional zeros if keepzeros = 0."
-                       , boost::python::args("self", "input", "keepzeroes")
-                       , boost::python::return_value_policy<boost::python::return_by_value>())
+                       , py::arg( "input"), py::arg("keepzeroes"))
     .def("deinterleave", static_cast<void (itpp::Sequence_Interleaver<T>::*)(const itpp::Vec<T> &, itpp::Vec<T> &, short)>(&itpp::Sequence_Interleaver<T>::deinterleave)
                        , "Function for sequence deinterleaving. Removes additional zeros if keepzeros = 0."
-                       , boost::python::args("self", "input", "output", "keepzeroes"))
+                       , py::arg( "input"), py::arg("output"), py::arg("keepzeroes"))
 
     .def("randomize_interleaver_sequence", &itpp::Sequence_Interleaver<T>::randomize_interleaver_sequence
-                                         , "Generate a new random sequence for interleaving."
-                                         , boost::python::args("self"))
+                                         , "Generate a new random sequence for interleaving.")
 
     .def("get_interleaver_sequence", &itpp::Sequence_Interleaver<T>::get_interleaver_sequence
-                                   , "Returns the interleaver sequence presently used."
-                                   , boost::python::args("self")
-                                   , boost::python::return_value_policy<boost::python::return_by_value>())
-
+                                   , "Returns the interleaver sequence presently used.")
+                                   
     .def("set_interleaver_sequence", &itpp::Sequence_Interleaver<T>::set_interleaver_sequence
                                    , "Set the interleaver sequence to be used."
-                                   , boost::python::args("self", "in_interleaver_sequence"))
+                                   , py::arg( "in_interleaver_sequence"))
 
     .def("set_interleaver_depth", &itpp::Sequence_Interleaver<T>::set_interleaver_depth
                                 , "Set the length of the interleaver sequence to be used."
-                                , boost::python::args("self", "in_interleaver_depth"))
+                                , py::arg( "in_interleaver_depth"))
 
     .def("get_interleaver_depth", &itpp::Sequence_Interleaver<T>::get_interleaver_depth
-                                , "Get the length of the interleaver sequence presently used."
-                                , boost::python::args("self")
-                                , boost::python::return_value_policy<boost::python::return_by_value>())
+                                , "Get the length of the interleaver sequence presently used.")
   ;
 }

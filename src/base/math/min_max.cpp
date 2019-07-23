@@ -17,11 +17,10 @@
 
 #include "min_max.h"
 
-BOOST_PYTHON_MODULE(min_max) {
-  boost::python::docstring_options local_docstring_options(true, true, false);
+PYBIND11_MODULE( min_max, m ) {
 
-  generate_min_max_wrapper<int>();
-  generate_min_max_wrapper<double>();
+  generate_pybind_wrapper_for_min_max_module<int>( m );
+  generate_pybind_wrapper_for_min_max_module<double>( m );
 
 }
 
