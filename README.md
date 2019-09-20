@@ -2,7 +2,7 @@
 Python wrapper library for signal processing and communications research.
 
 ## Description
-py-itpp is a set of Python wrappers over the open source IT++ library (which is written in C++). The wrappers use Boost.Python extensively and compile to a shared library that can be imported into Python. The py-itpp data structures can be easily converted to Numpy ndarrays for further processing and plotting. In addition to fast prototyping for signal processing and communications research, py-itpp is motivated by research into machine learning for communication systems.  
+py-itpp is a set of Python wrappers over the open source IT++ library (which is written in C++). The wrappers are built using PYBIND11 and compile to a shared library that can be imported into Python. The py-itpp data structures can be easily converted to Numpy ndarrays for further processing and plotting. In addition to fast prototyping for signal processing and communications research, py-itpp is motivated by research into machine learning for communication systems.  
 
 ## Support
 As of v0.0.3, only Python3 is supported; Python2 is no longer supported by this library.
