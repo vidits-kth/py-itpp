@@ -11,6 +11,9 @@ As of v0.0.3, only Python3 is supported; Python2 is no longer supported by this 
 
 ```
 pip3 install pybind11
+```
+Re-open the terminal.  
+
 
 git clone https://github.com/vidits-kth/py-itpp.git
 cd py-itpp  
