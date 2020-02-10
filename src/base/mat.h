@@ -19,6 +19,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 #include <pybind11/complex.h>
+#include <pybind11/numpy.h>
 
 #include <sstream>
 
@@ -50,50 +51,29 @@ std::string _itpp_mat_print_wrap(const itpp::Mat<Num_T> &m)
   return oss.str();
 }
 
-////! Convert Mat<Num_T> to Numpy array
-////! for Num_T=int,float,std::complex<double>
-//template<class Num_T>
-//py::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<Num_T> &m)
-//{
-//  int rows = m.rows();
-//  int cols = m.cols();
-//
-//  py::tuple shape = py::make_tuple(rows, cols);
-//  py::numpy::dtype dtype = py::numpy::dtype::get_builtin<Num_T>();
-//  py::numpy::ndarray np = py::numpy::zeros(shape, dtype);
-//
-//  for (int i = 0; i < rows; i++) {
-//    for (int j = 0; j < cols; j++) {
-//      np[i][j] = m.get(i,j);
-//    }
-//  }
-//
-//  return np;
-//}
-//
-////! Convert Mat<Num_T> to Numpy array
-////! for Num_T=itpp::bin
-//template<>
-//py::numpy::ndarray _itpp_mat_to_numpy_ndarray(const itpp::Mat<itpp::bin> &m)
-//{
-//  int rows = m.rows();
-//  int cols = m.cols();
-//
-//  py::tuple shape = py::make_tuple(rows, cols);
-//  py::numpy::dtype dtype = py::numpy::dtype::get_builtin<bool>();
-//  py::numpy::ndarray np = py::numpy::zeros(shape, dtype);
-//
-//  for (int i = 0; i < rows; i++) {
-//    for (int j = 0; j < cols; j++) {
-//      np[i][j] = static_cast<int>(m.get(i,j));
-//    }
-//  }
-//
-//  return np;
-//}
+template<class Num_T>
+itpp::Mat<Num_T> _numpy_array_to_mat(py::array_t<Num_T> in) {
 
-//! Wrapper function of templated functions related to Mat<Num_T>
-//! and the definition of the templated class Mat<Num_T>
+  auto inbuf = in.request();
+  if (inbuf.ndim != 2)
+    throw std::runtime_error("Incompatible number of dimensions!");
+
+  Num_T *inptr = (Num_T *) inbuf.ptr;
+
+  int rows = inbuf.shape[0];
+  int cols = inbuf.shape[1];
+
+  itpp::Mat<Num_T> out(rows, cols);
+  out.clear();
+  for( int i = 0; i < rows; ++i ){
+    for( int j = 0; j < cols; ++j ){
+      out.set(i, j,  inptr[i * cols + j]);
+    }
+  }
+
+  return out;
+}
+
 template<class Num_T>
 void generate_itpp_mat_wrapper(py::module &m, char const * name) {
 
@@ -134,8 +114,29 @@ void generate_itpp_mat_wrapper(py::module &m, char const * name) {
                                                            const itpp::Mat<Num_T> &)>
                                                 (&itpp::elem_div_sum<Num_T>));
 
+  m.def("numpy_array_to_mat", &_numpy_array_to_mat<Num_T>);
   //! Definition of Mat
-  py::class_<itpp::Mat<Num_T> >(m, name)
+  py::class_<itpp::Mat<Num_T> >(m, name, py::buffer_protocol())
+
+    .def_buffer([](itpp::Mat<Num_T>& m) -> pybind11::buffer_info {
+        return pybind11::buffer_info(
+            // Pointer to buffer
+            m._data(),
+            // Size of one scalar
+            sizeof(Num_T),
+            // Python struct-style format descriptor
+            pybind11::format_descriptor<Num_T>::format(),
+            // Number of dimensions
+            2,
+            // Buffer dimensions
+            { m.rows(), m.cols() },
+            // Strides (in bytes) for each index
+            {
+                sizeof( Num_T ),
+		sizeof( Num_T ) * m.rows(),
+            }
+        );
+    })
 
     .def(py::init<>())
     .def(py::init<const itpp::Factory &>())

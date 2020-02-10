@@ -22,7 +22,7 @@ PYBIND11_MODULE(vec, m)
   generate_itpp_vec_wrapper<double>(m, "vec");
   generate_itpp_vec_wrapper<std::complex<double> >(m, "cvec");
   generate_itpp_vec_wrapper<int>(m, "ivec");
-  generate_itpp_vec_wrapper<itpp::bin>(m, "bvec");
+//  generate_itpp_vec_wrapper<itpp::bin>(m, "bvec");
   generate_itpp_vec_wrapper<short int>(m, "svec");
 
 }

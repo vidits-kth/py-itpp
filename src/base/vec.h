@@ -18,6 +18,7 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/operators.h>
 #include <pybind11/complex.h>
+#include <pybind11/numpy.h>
 
 #include <sstream>
 
@@ -74,42 +75,25 @@ void _copy_logical(itpp::Vec<Num_T> &v, const itpp::Vec<itpp::bin> &binlist, con
       v(i) = val;
 }
 
-//// Convert Vec<Num_T> to Numpy array for Num_T=int,float,std::complex<double>
-//template<class Num_T>
-//py::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<Num_T> &v)
-//{
-//  int i, sz = v.length();
-//
-//  py::tuple shape = py::make_tuple(sz);
-//  py::numpy::dtype dtype = py::numpy::dtype::get_builtin<Num_T>();
-//  py::numpy::ndarray np = py::numpy::zeros(shape, dtype);
-//
-//  for (i = 0; i < sz; i++) {
-//    np[i] = v(i);
-//  }
-//
-//  return np;
-//}
-//
-//// Convert Vec<Num_T> to Numpy array for Num_T=itpp::bin
-//template<>
-//py::numpy::ndarray _itpp_vec_to_numpy_ndarray(const itpp::Vec<itpp::bin> &v)
-//{
-//  int i, sz = v.length();
-//
-//  py::tuple shape = py::make_tuple(sz);
-//  py::numpy::dtype dtype = py::numpy::dtype::get_builtin<bool>();
-//  py::numpy::ndarray np = py::numpy::zeros(shape, dtype);
-//
-//  for (i = 0; i < sz; i++) {
-//    np[i] = (int)v(i);
-//  }
-//
-//  return np;
-//}
+template<class Num_T>
+itpp::Vec<Num_T> _numpy_array_to_vec(py::array_t<Num_T> in) {
 
-//! Wrapper function of templated functions related to Vec<Num_T>
-//! and the definition of the templated class Vec<Num_T>
+  auto inbuf = in.request();
+  if (inbuf.ndim != 1)
+    throw std::runtime_error("Incompatible number of dimensions!");
+
+  Num_T *inptr = (Num_T *) inbuf.ptr;
+
+  int size = inbuf.shape[0];
+  itpp::Vec<Num_T> out(size);
+  out.clear();
+  for( int i = 0; i < size; ++i ){
+    out[i] = inptr[i];
+  }
+
+  return out;
+}
+
 
 template<class Num_T>
 void generate_itpp_vec_wrapper(py::module &m, char const * name) {
@@ -137,8 +121,29 @@ void generate_itpp_vec_wrapper(py::module &m, char const * name) {
                                             itpp::Vec<Num_T> &)>(&itpp::elem_div_out));
   m.def("elem_div_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div_sum));
 
+  m.def("numpy_array_to_vec", &_numpy_array_to_vec<Num_T>);
+
   //! Declaration of Vec
-  py::class_<itpp::Vec<Num_T> >(m, name)
+  py::class_<itpp::Vec<Num_T> >(m, name, py::buffer_protocol())
+
+    .def_buffer([](itpp::Vec<Num_T>& v) -> pybind11::buffer_info {
+        return pybind11::buffer_info(
+            // Pointer to buffer
+            v._data(),
+            // Size of one scalar
+            sizeof(Num_T),
+            // Python struct-style format descriptor
+            pybind11::format_descriptor<Num_T>::format(),
+            // Number of dimensions
+            1,
+            // Buffer dimensions
+            { v.size() },
+            // Strides (in bytes) for each index
+            {
+                sizeof( Num_T ),
+            }
+        );
+    })
 
     .def(py::init<>())
     .def(py::init<int>())
@@ -276,7 +281,7 @@ void generate_itpp_vec_wrapper(py::module &m, char const * name) {
     .def("__str__", &_print_wrap<Num_T>)
 
     //! Additional method to support conversion to Numpy ndarray
-//    .def("to_numpy_ndarray", &_itpp_vec_to_numpy_ndarray<Num_T>)
+//    .def("to_numpy_array", &_itpp_vec_to_numpy_ndarray<Num_T>)
 
   ;
 
