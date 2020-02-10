@@ -14,7 +14,7 @@ pip3 install pybind11
 ```
 Re-open the terminal.  
 
-
+```
 git clone https://github.com/vidits-kth/py-itpp.git
 cd py-itpp  
 ./install_prerequisites_python3.sh  
