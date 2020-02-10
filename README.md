@@ -7,29 +7,18 @@ py-itpp is a set of Python wrappers over the open source IT++ library (which is 
 ## Support
 As of v0.0.3, only Python3 is supported; Python2 is no longer supported by this library.
 
-## Native Installation
-Clone this repo.  
+## Installation
 
-### Python3:  
 ```
+pip3 install pybind11
+
+git clone https://github.com/vidits-kth/py-itpp.git
 cd py-itpp  
 ./install_prerequisites_python3.sh  
 make install  
 pip3 install -e .  
 ```
-Close the terminal and open a new one.  
-
-## Anaconda Installation
-Clone this repo.  
-
-### Python3:  
-```
-cd py-itpp  
-./install_prerequisites_python3.sh  
-conda install boost
-make install  
-pip install -e .  
-```
+Re-open the terminal.  
 
 
 ## Usage
