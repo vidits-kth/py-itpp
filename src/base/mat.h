@@ -51,8 +51,11 @@ std::string _itpp_mat_print_wrap(const itpp::Mat<Num_T> &m)
   return oss.str();
 }
 
+//
+// Conversion from Numpy POD array to itpp::Mat<POD>
+//
 template<class Num_T>
-itpp::Mat<Num_T> _numpy_array_to_mat(py::array_t<Num_T> in) {
+itpp::Mat<Num_T> _numpy_pod_array_to_mat(py::array_t<Num_T> in) {
 
   auto inbuf = in.request();
   if (inbuf.ndim != 2)
@@ -72,6 +75,87 @@ itpp::Mat<Num_T> _numpy_array_to_mat(py::array_t<Num_T> in) {
   }
 
   return out;
+}
+
+//
+// Conversion from Numpy char array to itpp::Vec<itpp::bin>
+//
+itpp::Mat<itpp::bin> _numpy_int8_array_to_bmat(py::array_t<char> in) {
+
+  auto inbuf = in.request();
+  if (inbuf.ndim != 2)
+    throw std::runtime_error("Incompatible number of dimensions!");
+
+  char *inptr = (char *) inbuf.ptr;
+
+  int rows = inbuf.shape[0];
+  int cols = inbuf.shape[1];
+
+  itpp::Mat<itpp::bin> out(rows, cols);
+  out.clear();
+  for( int i = 0; i < rows; ++i ){
+    for( int j = 0; j < cols; ++j ){
+      out.set(i, j,  inptr[i * cols + j] != 0 );
+    }
+  }
+
+  return out;
+}
+
+//
+// Template specialization for POD types
+//
+template<class Num_T>
+void numpy_array_to_mat( py::module &m ){
+  m.def("numpy_array_to_mat", &_numpy_pod_array_to_mat<Num_T>);
+}
+
+//
+// Template specialization for itpp::bin type
+//
+template<>
+void numpy_array_to_mat<itpp::bin>( py::module &m ){
+  m.def("numpy_array_to_mat", &_numpy_int8_array_to_bmat);
+}
+
+template<class Num_T>
+pybind11::buffer_info mat_buffer_info(itpp::Mat<Num_T> &m){
+  return pybind11::buffer_info(
+           // Pointer to buffer
+            m._data(),
+            // Size of one scalar
+            sizeof(Num_T),
+            // Python struct-style format descriptor
+            pybind11::format_descriptor<Num_T>::format(),
+            // Number of dimensions
+            2,
+            // Buffer dimensions
+            { m.rows(), m.cols() },
+            // Strides (in bytes) for each index
+            { sizeof( Num_T ),
+              sizeof( Num_T ) * m.rows(),
+            }
+         );
+}
+
+template<>
+pybind11::buffer_info mat_buffer_info<itpp::bin>(itpp::Mat<itpp::bin> &m){
+  return pybind11::buffer_info(
+           // Pointer to buffer
+            m._data(),
+            // Size of one scalar
+            sizeof(char),
+            // Python struct-style format descriptor
+            pybind11::format_descriptor<char>::format(),
+            // Number of dimensions
+            2,
+            // Buffer dimensions
+            { m.rows(), m.cols() },
+            // Strides (in bytes) for each index
+            { sizeof( char ),
+              sizeof( char ) * m.rows(),
+            }
+         );
 }
 
 template<class Num_T>
@@ -114,28 +198,13 @@ void generate_itpp_mat_wrapper(py::module &m, char const * name) {
                                                            const itpp::Mat<Num_T> &)>
                                                 (&itpp::elem_div_sum<Num_T>));
 
-  m.def("numpy_array_to_mat", &_numpy_array_to_mat<Num_T>);
+  numpy_array_to_mat<Num_T>( m );
+
   //! Definition of Mat
   py::class_<itpp::Mat<Num_T> >(m, name, py::buffer_protocol())
 
     .def_buffer([](itpp::Mat<Num_T>& m) -> pybind11::buffer_info {
-        return pybind11::buffer_info(
-            // Pointer to buffer
-            m._data(),
-            // Size of one scalar
-            sizeof(Num_T),
-            // Python struct-style format descriptor
-            pybind11::format_descriptor<Num_T>::format(),
-            // Number of dimensions
-            2,
-            // Buffer dimensions
-            { m.rows(), m.cols() },
-            // Strides (in bytes) for each index
-            {
-                sizeof( Num_T ),
-		sizeof( Num_T ) * m.rows(),
-            }
-        );
+        return mat_buffer_info( m );
     })
 
     .def(py::init<>())

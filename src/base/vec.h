@@ -75,8 +75,11 @@ void _copy_logical(itpp::Vec<Num_T> &v, const itpp::Vec<itpp::bin> &binlist, con
       v(i) = val;
 }
 
+//
+// Conversion from Numpy POD array to itpp::Vec<POD>
+//
 template<class Num_T>
-itpp::Vec<Num_T> _numpy_array_to_vec(py::array_t<Num_T> in) {
+itpp::Vec<Num_T> _numpy_pod_array_to_vec(py::array_t<Num_T> in) {
 
   auto inbuf = in.request();
   if (inbuf.ndim != 1)
@@ -90,13 +93,71 @@ itpp::Vec<Num_T> _numpy_array_to_vec(py::array_t<Num_T> in) {
   for( int i = 0; i < size; ++i ){
     out[i] = inptr[i];
   }
-
   return out;
 }
 
+//
+// Conversion from Numpy char array to itpp::Vec<itpp::bin>
+//
+itpp::Vec<itpp::bin> _numpy_int8_array_to_bvec(py::array_t<char> in) {
+
+  auto inbuf = in.request();
+  if (inbuf.ndim != 1)
+    throw std::runtime_error("Incompatible number of dimensions!");
+
+  char *inptr = (char *) inbuf.ptr;
+
+  int size = inbuf.shape[0];
+  itpp::Vec<itpp::bin> out(size);
+  out.clear();
+  for( int i = 0; i < size; ++i ){
+    out[i] = ( inptr[i] != 0 );
+  }
+  return out;
+}
+
+//
+// Template specialization for POD types
+//
+template<class Num_T>
+void numpy_array_to_vec( py::module &m ){
+  m.def("numpy_array_to_vec", &_numpy_pod_array_to_vec<Num_T>);
+}
+
+//
+// Template specialization for itpp::bin type
+//
+template<>
+void numpy_array_to_vec<itpp::bin>( py::module &m ){ 
+  m.def("numpy_array_to_vec", &_numpy_int8_array_to_bvec);
+}
 
 template<class Num_T>
-void generate_itpp_vec_wrapper(py::module &m, char const * name) {
+pybind11::buffer_info vec_buffer_info(itpp::Vec<Num_T> &v){
+  return pybind11::buffer_info(
+            v._data(),
+            sizeof(Num_T),
+            pybind11::format_descriptor<Num_T>::format(),
+            1,
+            { v.size() },
+            { sizeof( Num_T ) }
+         );
+}
+
+template<>
+pybind11::buffer_info vec_buffer_info<itpp::bin>(itpp::Vec<itpp::bin> &v){
+  return pybind11::buffer_info(
+            v._data(),
+            sizeof(char),
+            pybind11::format_descriptor<char>::format(),
+            1,
+            { v.size() },
+            { sizeof( char ) }
+         );
+}
+
+template<class Num_T>
+void generate_module_functions( py::module &m ) {
 
   m.def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_mult));
   m.def("elem_mult", static_cast<itpp::Vec<Num_T> (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &,
@@ -121,28 +182,20 @@ void generate_itpp_vec_wrapper(py::module &m, char const * name) {
                                             itpp::Vec<Num_T> &)>(&itpp::elem_div_out));
   m.def("elem_div_sum", static_cast<Num_T (*)(const itpp::Vec<Num_T> &, const itpp::Vec<Num_T> &)>(&itpp::elem_div_sum));
 
-  m.def("numpy_array_to_vec", &_numpy_array_to_vec<Num_T>);
+  numpy_array_to_vec<Num_T>( m );
+}
 
+//
+// Template for POD types (aupports Numpy conversion)
+//
+
+template<class Num_T>
+void generate_vec_class( py::module &m, char const * name ) {
   //! Declaration of Vec
   py::class_<itpp::Vec<Num_T> >(m, name, py::buffer_protocol())
 
     .def_buffer([](itpp::Vec<Num_T>& v) -> pybind11::buffer_info {
-        return pybind11::buffer_info(
-            // Pointer to buffer
-            v._data(),
-            // Size of one scalar
-            sizeof(Num_T),
-            // Python struct-style format descriptor
-            pybind11::format_descriptor<Num_T>::format(),
-            // Number of dimensions
-            1,
-            // Buffer dimensions
-            { v.size() },
-            // Strides (in bytes) for each index
-            {
-                sizeof( Num_T ),
-            }
-        );
+        return vec_buffer_info( v );
     })
 
     .def(py::init<>())
@@ -307,3 +360,4 @@ void generate_itpp_vec_wrapper(py::module &m, char const * name) {
 //  py::def("set", static_cast<void (*)(itpp::Vec<Num_T> &, const Num_T &, const itpp::Vec<itpp::bin> &)>(&_set_from_value<Num_T>));
 
 }
+

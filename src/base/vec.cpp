@@ -17,12 +17,18 @@
 
 #include "vec.h"
 
+
+template<class Num_T>
+void generate_itpp_vec_wrapper(py::module &m, char const * name) {
+  generate_module_functions<Num_T>( m );
+  generate_vec_class<Num_T>( m, name );
+}
+
 PYBIND11_MODULE(vec, m)
 {
   generate_itpp_vec_wrapper<double>(m, "vec");
   generate_itpp_vec_wrapper<std::complex<double> >(m, "cvec");
   generate_itpp_vec_wrapper<int>(m, "ivec");
-//  generate_itpp_vec_wrapper<itpp::bin>(m, "bvec");
+  generate_itpp_vec_wrapper<itpp::bin>(m, "bvec");
   generate_itpp_vec_wrapper<short int>(m, "svec");
-
 }

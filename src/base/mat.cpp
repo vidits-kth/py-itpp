@@ -39,6 +39,6 @@ PYBIND11_MODULE(mat, m)
   generate_itpp_mat_wrapper<short int>(m, "smat");
 
   // bin matrix
-//  generate_itpp_mat_wrapper<itpp::bin>(m, "bmat");
+  generate_itpp_mat_wrapper<itpp::bin>(m, "bmat");
 
 }
