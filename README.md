@@ -34,6 +34,6 @@ print(a)
 Examples: https://github.com/vidits-kth/py-itpp/tree/master/examples  
 
 ## Projects using py-itpp
+https://github.com/lpkg/LinkAdaptationCSI  
+https://github.com/vidits-kth/contextual-mab-link-adaptation  
 https://github.com/vidits-kth/py-radio-autoencoder  
-https://github.com/vidits-kth/contextual-mab-link-adaptation
-https://github.com/lpkg/LinkAdaptationCSI
