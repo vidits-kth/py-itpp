@@ -11,11 +11,6 @@ As of v0.0.3, only Python3 is supported.
 
 py-itpp is available as a public Docker image hosted at [vidit13/py-itpp](https://hub.docker.com/repository/docker/vidit13/py-itpp) .
 
-The latest image can be pulled by specifying
-```
-FROM vidit13/py-itpp
-```
-
 
 ## Installation
 
